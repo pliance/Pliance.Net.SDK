@@ -27,29 +27,37 @@ namespace Pliance.SDK
                 throw new ArgumentNullException(nameof(command));
             }
 
-            var client = _factory.Create(_givenName, _subject);
             var json = JsonConvert.SerializeObject(command);
-            var content = new StringContent(json, Encoding.UTF8, "application/json"); ;
-            var response = await client.PutAsync("api/PersonCommand", content);
-            var responseString = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<RegisterPersonResponse>(responseString);
-
-            if (!result.Success)
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            return await Execute(async (client) =>
             {
-                throw new Exception(result.Message);
-            }
+                HttpResponseMessage response = await client.PutAsync("api/PersonCommand", content);
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<RegisterPersonResponse>(responseString);
 
-            return result;
+                if (!result.Success)
+                {
+                    throw new Exception(result.Message);
+                }
+
+                return result;
+            });
         }
 
         public async Task Ping()
         {
-            var client = _factory.Create("", "");
-            var response = await client.GetAsync("api/Ping");
-            var responseString = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<RegisterPersonResponse>(responseString);
+            await Execute<object>(async (client) =>
+            {
+                HttpResponseMessage response = await client.GetAsync("api/Ping");
 
-            Console.WriteLine(responseString);
+                var responseString = await response.Content.ReadAsStringAsync();
+                return null;
+            });
+        }
+
+        private Task<T> Execute<T>(Func<HttpClient, Task<T>> action)
+        {
+            return _factory.Execute<T>(action, _givenName, _subject);
         }
     }
 }
