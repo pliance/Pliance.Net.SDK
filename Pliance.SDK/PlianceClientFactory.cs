@@ -24,7 +24,7 @@ namespace Pliance.SDK
         private HttpClient _client;
         private Stack<HttpClient> _clients = new Stack<HttpClient>();
         private AsyncMonitor _monitor = new AsyncMonitor();
-        
+
         public PlianceClientFactory(string secret, string company, string issuer, string url, X509Certificate2 certificate = null, int count = 8)
         {
             _secret = secret;
@@ -58,10 +58,9 @@ namespace Pliance.SDK
                 client = _clients.Pop();
             }
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", CreateJwtToken(givenName, subject));
-
             try
             {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", CreateJwtToken(givenName, subject));
                 return await action(client);
             }
             catch (Exception)

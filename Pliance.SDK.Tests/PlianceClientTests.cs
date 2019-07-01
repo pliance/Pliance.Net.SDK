@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Pliance.SDK.Contract;
 using Xunit;
 
@@ -40,12 +41,14 @@ namespace Pliance.SDK.Tests
             for (var i = 0; i < 20_000; ++i)
             {
                 Console.WriteLine(i);
-                await client.RegisterPerson(new RegisterPersonCommand()
+                var result = await client.RegisterPerson(new RegisterPersonCommand()
                 {
                     PersonReferenceId = Guid.NewGuid().ToString(),
                     FirstName = "Adam",
                     LastName = "Användare"
                 });
+
+                Console.WriteLine(JsonConvert.SerializeObject(result));
             }
         }
     }
