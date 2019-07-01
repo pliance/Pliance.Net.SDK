@@ -135,3 +135,4 @@ tmp
 *.info
 #id_rsa
 **/*.pfx
+Dockerfile

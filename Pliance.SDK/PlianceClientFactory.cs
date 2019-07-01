@@ -20,7 +20,6 @@ namespace Pliance.SDK
         private string _issuer;
         private string _url;
         private X509Certificate2 _certificate;
-        private HttpClient _client;
         private Stack<HttpClient> _clients = new Stack<HttpClient>();
         private AsyncMonitor _monitor = new AsyncMonitor();
 
