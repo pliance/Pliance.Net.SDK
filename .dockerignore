@@ -1,0 +1,15 @@
+**/node_modules
+**/bin
+**/obj
+**/dist
+**/.git
+**/.wyrm
+**/wwwroot
+**/Pliance.Web/src/*.js
+tmp
+**/*.sh
+**/*.txt
+**/*.xsd
+**/*.md
+**/.vscode
+**/Dockerfile*
