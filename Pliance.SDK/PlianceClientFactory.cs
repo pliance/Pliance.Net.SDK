@@ -17,7 +17,6 @@ namespace Pliance.SDK
     public class PlianceClientFactory
     {
         private string _secret;
-        private string _company;
         private string _issuer;
         private string _url;
         private X509Certificate2 _certificate;
@@ -25,15 +24,14 @@ namespace Pliance.SDK
         private Stack<HttpClient> _clients = new Stack<HttpClient>();
         private AsyncMonitor _monitor = new AsyncMonitor();
 
-        public PlianceClientFactory(string secret, string company, string issuer, string url, X509Certificate2 certificate = null, int count = 8)
+        public PlianceClientFactory(string secret, string issuer, string url, X509Certificate2 certificate = null, int poolSize = 8)
         {
             _secret = secret;
-            _company = company;
             _issuer = issuer;
             _url = url;
             _certificate = certificate;
 
-            foreach (var i in Enumerable.Range(0, count))
+            foreach (var i in Enumerable.Range(0, poolSize))
             {
                 _clients.Push(CreateHttpClient());
             }
