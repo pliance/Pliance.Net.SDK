@@ -7,7 +7,7 @@ using Pliance.SDK.Contract;
 
 namespace Pliance.SDK
 {
-    public class PlianceClient
+    public class PlianceClient : IPlianceClient
     {
         private readonly PlianceClientFactory _factory;
         private readonly string _givenName;
@@ -31,9 +31,81 @@ namespace Pliance.SDK
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             return await Execute(async (client) =>
             {
-                HttpResponseMessage response = await client.PutAsync("api/PersonCommand", content);
+                var response = await client.PutAsync("api/PersonCommand", content);
                 var responseString = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<RegisterPersonResponse>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new Exception(result.Message);
+                }
+
+                return result;
+            });
+        }
+
+        public async Task<ArchivePersonResponse> ArchivePerson(ArchivePersonCommand command)
+        {
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+
+            var json = JsonConvert.SerializeObject(command);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            return await Execute(async (client) =>
+            {
+                var response = await client.PostAsync("api/PersonCommand/Archive", content);
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ArchivePersonResponse>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new Exception(result.Message);
+                }
+
+                return result;
+            });
+        }
+
+        public async Task<DeletePersonResponse> DeletePerson(DeletePersonCommand command)
+        {
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+
+            var json = JsonConvert.SerializeObject(command);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            return await Execute(async (client) =>
+            {
+                var response = await client.PostAsync("api/PersonCommand", content);
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<DeletePersonResponse>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new Exception(result.Message);
+                }
+
+                return result;
+            });
+        }
+
+        public async Task<ClassifyHitResponse> ClassifyPersonHit(ClassifyHitCommand command)
+        {
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+
+            var json = JsonConvert.SerializeObject(command);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            return await Execute(async (client) =>
+            {
+                var response = await client.PostAsync("api/PersonCommand/Classify", content);
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ClassifyHitResponse>(responseString);
 
                 if (!result.Success)
                 {
@@ -48,7 +120,7 @@ namespace Pliance.SDK
         {
             await Execute<object>(async (client) =>
             {
-                HttpResponseMessage response = await client.GetAsync("api/Ping");
+                var response = await client.GetAsync("api/Ping");
 
                 var responseString = await response.Content.ReadAsStringAsync();
                 return null;
