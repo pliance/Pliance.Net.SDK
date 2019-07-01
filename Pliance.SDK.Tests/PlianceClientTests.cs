@@ -9,24 +9,8 @@ namespace Pliance.SDK.Tests
 {
     public class PlianceClientTests
     {
-        // [Fact]
-        // public async Task Test1()
-        // {
-        //     var factory = new PlianceClientFactory(
-        //         secret: "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b",
-        //         company: "adam",
-        //         issuer: "Demo",
-        //         url: "https://adam.pliance.io/",
-        //         certificate: new X509Certificate2("client.pfx")
-        //     );
-
-        //     var client = factory.Create("givenname", "sub");
-
-        //     await client.Ping();
-        // }
-
         [Fact]
-        public async Task Test2()
+        public async Task Api_Ping_Success()
         {
             var factory = new PlianceClientFactory(
                 secret: "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b",
@@ -38,18 +22,27 @@ namespace Pliance.SDK.Tests
 
             var client = factory.Create("givenname", "sub");
 
-            for (var i = 0; i < 20_000; ++i)
-            {
-                Console.WriteLine(i);
-                var result = await client.RegisterPerson(new RegisterPersonCommand()
-                {
-                    PersonReferenceId = Guid.NewGuid().ToString(),
-                    FirstName = "Adam",
-                    LastName = "Användare"
-                });
+            await client.Ping();
+        }
 
-                Console.WriteLine(JsonConvert.SerializeObject(result));
-            }
+        [Fact]
+        public async Task Api_RegisterPerson_Success()
+        {
+            var factory = new PlianceClientFactory(
+                secret: "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b",
+                company: "Company",
+                issuer: "Company1",
+                url: "https://company1.pliance.io/",
+                certificate: new X509Certificate2("client.pfx")
+            );
+
+            var client = factory.Create("givenname", "sub");
+            var result = await client.RegisterPerson(new RegisterPersonCommand()
+            {
+                PersonReferenceId = Guid.NewGuid().ToString(),
+                FirstName = "Adam",
+                LastName = "Användare"
+            });
         }
     }
 }
