@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -130,6 +132,50 @@ namespace Pliance.SDK
         private Task<T> Execute<T>(Func<HttpClient, Task<T>> action)
         {
             return _factory.Execute<T>(action, _givenName, _subject);
+        }
+
+        public Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery query)
+        {
+            if (query is null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            return Execute(async (client) =>
+            {
+                var response = await client.GetAsync("api/PersonQuery/Search/" + query.UrlEncoded());
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<PersonSearchQueryResult>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new Exception(result.Message);
+                }
+
+                return result;
+            });
+        }
+
+        public Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery query)
+        {
+            if (query is null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            return Execute(async (client) =>
+            {
+                var response = await client.GetAsync($"api/PersonQuery/" + query.UrlEncoded());
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ViewPersonQueryResult>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new Exception(result.Message);
+                }
+
+                return result;
+            });
         }
     }
 }

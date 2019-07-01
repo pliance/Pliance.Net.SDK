@@ -9,6 +9,8 @@ namespace Pliance.SDK
         Task<ArchivePersonResponse> ArchivePerson(ArchivePersonCommand command);
         Task<DeletePersonResponse> DeletePerson(DeletePersonCommand command);
         Task<ClassifyHitResponse> ClassifyPersonHit(ClassifyHitCommand command);
+        Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery query);
+        Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery query);
         Task Ping();
     }
 }

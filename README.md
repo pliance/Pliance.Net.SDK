@@ -1,5 +1,10 @@
 # Pliance .NET SDK
 
+## NuGet
+```bash
+dotnet add package Pliance.NET-SDK
+```
+
 ## Create Factory
 ```csharp
 var factory = new PlianceClientFactory(
