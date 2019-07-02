@@ -36,7 +36,7 @@ namespace Pliance.SDK
             }
         }
 
-        public PlianceClient Create(string givenName, string subject)
+        public IPlianceClient Create(string givenName, string subject)
         {
             return new PlianceClient(this, givenName, subject);
         }
