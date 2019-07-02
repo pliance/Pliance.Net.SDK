@@ -1,10 +1,22 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace Pliance.SDK
 {
+    public class Box<T>
+    {
+        public T Item { get; }
+
+        public Box(T item)
+        {
+            Item = item;
+        }
+    }
+
     public static class ObjectExtensions
     {
         public static string UrlEncoded(this object obj)
@@ -14,7 +26,9 @@ namespace Pliance.SDK
                 return "";
             }
 
-            var map = UrlEncode(obj);
+            var map = new Dictionary<string, object>();
+            
+            UrlEncode(map, null, obj, null);
 
             if (!map.Any())
             {
@@ -24,46 +38,49 @@ namespace Pliance.SDK
             return "?" + string.Join("&", map.Select(x => $"{HttpUtility.UrlEncode(x.Key)}={HttpUtility.UrlEncode(x.Value.ToString())}"));
         }
 
-        private static Dictionary<string, object> UrlEncode(object obj)
-        {
-            var result = new Dictionary<string, object>();
-
-            UrlEncode(result, null, obj);
-            return result;
-        }
-
-        private static void UrlEncode(Dictionary<string, object> map, string path, object obj)
+        private static void UrlEncode(Dictionary<string, object> map, string path, object obj, PropertyInfo prop)
         {
             if (obj == null)
             {
                 return;
             }
 
-            foreach (var item in obj.GetType().GetProperties())
+            if (prop?.PropertyType.IsPrimitive == true || prop?.PropertyType == typeof(string))
             {
-                var name = path != null ? $"{path}.{item.Name}" : item.Name;
+                map[path] = obj;
+            }
+            else if (prop?.PropertyType.IsGenericType == true && prop?.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                object element = obj;
+                var boxType = typeof(Box<>);
+                Type[] typeArgs = { element.GetType() };
+                var makeme = boxType.MakeGenericType(typeArgs);
+                var box = Activator.CreateInstance(makeme, element);
 
-                if (item.PropertyType.IsPrimitive || item.PropertyType == typeof(string))
+                UrlEncode(map, $"{path}", element, box.GetType().GetProperty("Item"));
+            }
+            else if (prop?.PropertyType.GetInterfaces().Contains(typeof(IEnumerable)) == true)
+            {
+                var index = 0;
+                var array = (IEnumerable)obj;
+
+                foreach (var element in array)
                 {
-                    map[name] = item.GetValue(obj, null);
+                    var boxType = typeof(Box<>);
+                    Type[] typeArgs = { element.GetType() };
+                    var makeme = boxType.MakeGenericType(typeArgs);
+                    var box = Activator.CreateInstance(makeme, element);
+
+                    UrlEncode(map, $"{path}[{index++}]", element, box.GetType().GetProperty("Item"));
                 }
-                else if (item.PropertyType.IsGenericType && item.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            }
+            else
+            {
+                foreach (var item in obj.GetType().GetProperties())
                 {
-                    var type = item.PropertyType.GetGenericArguments()[0];
+                    var name = path != null ? $"{path}.{item.Name}" : item.Name;
 
-                    if (type.IsPrimitive)
-                    {
-                        var value = item.GetValue(obj, null);
-
-                        if (value != null)
-                        {
-                            map[name] = value;
-                        }
-                    }
-                }
-                else if (item.PropertyType.IsClass)
-                {
-                    UrlEncode(map, name, item.GetValue(obj, null));
+                    UrlEncode(map, name, item.GetValue(obj, null), item);
                 }
             }
         }
