@@ -27,7 +27,7 @@ namespace Pliance.SDK
             }
 
             var map = new Dictionary<string, object>();
-            
+
             UrlEncode(map, null, obj, null);
 
             if (!map.Any())
@@ -51,13 +51,10 @@ namespace Pliance.SDK
             }
             else if (prop?.PropertyType.IsGenericType == true && prop?.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
-                object element = obj;
-                var boxType = typeof(Box<>);
-                Type[] typeArgs = { element.GetType() };
-                var makeme = boxType.MakeGenericType(typeArgs);
-                var box = Activator.CreateInstance(makeme, element);
+                object unwrapped = obj;
+                var box = Package(unwrapped);
 
-                UrlEncode(map, $"{path}", element, box.GetType().GetProperty("Item"));
+                UrlEncode(map, $"{path}", unwrapped, box.GetType().GetProperty("Item"));
             }
             else if (prop?.PropertyType.GetInterfaces().Contains(typeof(IEnumerable)) == true)
             {
@@ -66,10 +63,7 @@ namespace Pliance.SDK
 
                 foreach (var element in array)
                 {
-                    var boxType = typeof(Box<>);
-                    Type[] typeArgs = { element.GetType() };
-                    var makeme = boxType.MakeGenericType(typeArgs);
-                    var box = Activator.CreateInstance(makeme, element);
+                    var box = Package(element);
 
                     UrlEncode(map, $"{path}[{index++}]", element, box.GetType().GetProperty("Item"));
                 }
@@ -83,6 +77,14 @@ namespace Pliance.SDK
                     UrlEncode(map, name, item.GetValue(obj, null), item);
                 }
             }
+        }
+
+        private static object Package(object obj)
+        {
+            var makeme = typeof(Box<>).MakeGenericType(new Type[] { obj.GetType() });
+            var box = Activator.CreateInstance(makeme, obj);
+
+            return box;
         }
     }
 }
