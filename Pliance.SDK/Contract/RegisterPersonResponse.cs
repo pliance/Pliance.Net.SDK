@@ -5,6 +5,6 @@ namespace Pliance.SDK.Contract
 {
     public class RegisterPersonResponse : Response
     {
-        public IEnumerable<IGrouping<string, Hit>> Hits { get; set; }
+        public List<List<Hit>> Hits { get; set; }
     }
 }

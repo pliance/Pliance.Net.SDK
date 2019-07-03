@@ -33,6 +33,7 @@ namespace Pliance.SDK
             {
                 var response = await client.PutAsync("api/PersonCommand", content);
                 var responseString = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(responseString);
                 var result = JsonConvert.DeserializeObject<RegisterPersonResponse>(responseString);
 
                 if (!result.Success)
