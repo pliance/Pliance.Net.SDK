@@ -12,5 +12,10 @@ namespace Pliance.SDK
         Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery query);
         Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery query);
         Task Ping();
+        Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command);
+        Task<DeleteCompanyResponse> DeleteCompany(DeleteCompanyCommand command);
+        Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command);
+        Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery request);
+        Task<ViewCompanyQueryResult> ViewCompany(ViewCompanyQuery request);        
     }
 }
