@@ -33,7 +33,6 @@ namespace Pliance.SDK
             {
                 var response = await client.PutAsync("api/PersonCommand", content);
                 var responseString = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(responseString);
                 var result = JsonConvert.DeserializeObject<RegisterPersonResponse>(responseString);
 
                 if (!result.Success)
@@ -80,7 +79,7 @@ namespace Pliance.SDK
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             return await Execute(async (client) =>
             {
-                var response = await client.PostAsync("api/PersonCommand", content);
+                var response = await client.DeleteAsync("api/PersonCommand" + command.UrlEncoded());
                 var responseString = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<DeletePersonResponse>(responseString);
 
@@ -175,6 +174,88 @@ namespace Pliance.SDK
 
                 return result;
             });
+        }
+
+        public async Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command)
+        {
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+
+            var json = JsonConvert.SerializeObject(command);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            return await Execute(async (client) =>
+            {
+                var response = await client.PostAsync("api/PersonCompany", content);
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<RegisterCompanyResponse>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new Exception(result.Message);
+                }
+
+                return result;
+            });
+        }
+
+        public async Task<DeleteCompanyResponse> DeleteCompany(DeleteCompanyCommand command)
+        {
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+
+            var json = JsonConvert.SerializeObject(command);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            return await Execute(async (client) =>
+            {
+                var response = await client.DeleteAsync("api/PersonCompany/Archive" + command.UrlEncoded());
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<DeleteCompanyResponse>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new Exception(result.Message);
+                }
+
+                return result;
+            });
+        }
+
+        public async Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command)
+        {
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+
+            var json = JsonConvert.SerializeObject(command);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            return await Execute(async (client) =>
+            {
+                var response = await client.PostAsync("api/PersonCompany/Archive", content);
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ArchiveCompanyResponse>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new Exception(result.Message);
+                }
+
+                return result;
+            });
+        }
+
+        public Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ViewCompanyQueryResult> ViewCompany(ViewCompanyQuery request)
+        {
+            throw new NotImplementedException();
         }
     }
 }
