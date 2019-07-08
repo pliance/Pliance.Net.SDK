@@ -132,14 +132,14 @@ namespace Pliance.SDK
             return _factory.Execute<T>(action, _givenName, _subject);
         }
 
-        public Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery query)
+        public async Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery query)
         {
             if (query is null)
             {
                 throw new ArgumentNullException(nameof(query));
             }
 
-            return Execute(async (client) =>
+            return await Execute(async (client) =>
             {
                 var response = await client.GetAsync("api/PersonQuery/Search/" + query.UrlEncoded());
                 var responseString = await response.Content.ReadAsStringAsync();
@@ -154,14 +154,14 @@ namespace Pliance.SDK
             });
         }
 
-        public Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery query)
+        public async Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery query)
         {
             if (query is null)
             {
                 throw new ArgumentNullException(nameof(query));
             }
 
-            return Execute(async (client) =>
+            return await Execute(async (client) =>
             {
                 var response = await client.GetAsync($"api/PersonQuery/" + query.UrlEncoded());
                 var responseString = await response.Content.ReadAsStringAsync();
@@ -248,14 +248,48 @@ namespace Pliance.SDK
             });
         }
 
-        public Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery request)
+        public async Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery query)
         {
-            throw new NotImplementedException();
+            if (query is null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            return await Execute(async (client) =>
+            {
+                var response = await client.GetAsync("api/CompanyQuery/Search/" + query.UrlEncoded());
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<CompanySearchQueryResult>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new Exception(result.Message);
+                }
+
+                return result;
+            });
         }
 
-        public Task<ViewCompanyQueryResult> ViewCompany(ViewCompanyQuery request)
+        public async Task<ViewCompanyQueryResult> ViewCompany(ViewCompanyQuery query)
         {
-            throw new NotImplementedException();
+            if (query is null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            return await Execute(async (client) =>
+            {
+                var response = await client.GetAsync($"api/CompanyQuery/" + query.UrlEncoded());
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<ViewCompanyQueryResult>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new Exception(result.Message);
+                }
+
+                return result;
+            });
         }
     }
 }
