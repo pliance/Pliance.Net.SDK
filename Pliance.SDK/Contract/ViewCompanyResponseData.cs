@@ -9,6 +9,6 @@ namespace Pliance.SDK.Contract
         public CompanyIdentity Identity { get; set; }
         public string Name { get; set; }
         public Graph Graph { get; set; }
-        // public List<Beneficiary> Beneficiaries { get; set; }
+        public List<Beneficiary> Beneficiaries { get; set; }
     }
 }
