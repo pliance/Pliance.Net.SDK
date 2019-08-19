@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Pliance.SDK.Contract;
+using Pliance.SDK.Exceptions;
 
 namespace Pliance.SDK
 {
@@ -116,15 +118,27 @@ namespace Pliance.SDK
             });
         }
 
-        public async Task Ping()
+        public async Task<PingResponse> Ping()
         {
-            await Execute<object>(async (client) =>
+            return await Execute(async (client) =>
             {
                 var response = await client.GetAsync("api/Ping");
 
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
                 var responseString = await response.Content.ReadAsStringAsync();
-                return null;
-            });
+                var result = JsonConvert.DeserializeObject<PingResponse>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new Exception(result.Message);
+                }
+
+                return result;
+            });            
         }
 
         private Task<T> Execute<T>(Func<HttpClient, Task<T>> action)

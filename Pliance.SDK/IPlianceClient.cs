@@ -11,7 +11,7 @@ namespace Pliance.SDK
         Task<ClassifyHitResponse> ClassifyPersonHit(ClassifyHitCommand command);
         Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery query);
         Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery query);
-        Task Ping();
+        Task<PingResponse> Ping();
         Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command);
         Task<DeleteCompanyResponse> DeleteCompany(DeleteCompanyCommand command);
         Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command);
