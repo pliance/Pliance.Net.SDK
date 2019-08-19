@@ -31,16 +31,16 @@ namespace Pliance.SDK.Tests
             });
         }
 
-        [Fact]
-        public async Task Api_DeletePerson_Success()
-        {
-            var factory = CreateFactory();
-            var client = factory.Create("givenname", "sub");
-            var result = await client.DeletePerson(new DeletePersonCommand
-            {
-                PersonReferenceId = "reference-id"
-            });
-        }      
+        // [Fact]
+        // public async Task Api_DeletePerson_Success()
+        // {
+        //     var factory = CreateFactory();
+        //     var client = factory.Create("givenname", "sub");
+        //     var result = await client.DeletePerson(new DeletePersonCommand
+        //     {
+        //         PersonReferenceId = "reference-id"
+        //     });
+        // }      
 
         [Fact]
         public async Task Api_ArchivePerson_Success()
@@ -53,19 +53,19 @@ namespace Pliance.SDK.Tests
             });
         }        
 
-        [Fact]
-        public async Task Api_ClassifyPerson_Success()
-        {
-            var factory = CreateFactory();
-            var client = factory.Create("givenname", "sub");
-            var result = await client.ClassifyPersonHit(new ClassifyHitCommand
-            {
-                PersonReferenceId = "reference-id",
-                MatchId = "matchId",
-                AliasId ="aliasId",
-                Classification = ClassificationType.Positive
-            });
-        }    
+        // [Fact]
+        // public async Task Api_ClassifyPerson_Success()
+        // {
+        //     var factory = CreateFactory();
+        //     var client = factory.Create("givenname", "sub");
+        //     var result = await client.ClassifyPersonHit(new ClassifyHitCommand
+        //     {
+        //         PersonReferenceId = "reference-id",
+        //         MatchId = "matchId",
+        //         AliasId ="aliasId",
+        //         Classification = ClassificationType.Positive
+        //     });
+        // }    
 
         [Fact]
         public async Task Api_SearchPerson_Success()
