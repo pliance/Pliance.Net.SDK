@@ -100,8 +100,8 @@ namespace Pliance.SDK
             {
                 Issuer = _issuer,
                 Audience = "pliance.io",
-                Expires = DateTime.UtcNow.AddSeconds(300),
-                Subject = new ClaimsIdentity(new Claim[] {
+                Expires = DateTime.UtcNow.AddMinutes(5),
+                Subject = new ClaimsIdentity(new[] {
                     new Claim("given_name", givenName),
                     new Claim("sub", subject),
                 }),
