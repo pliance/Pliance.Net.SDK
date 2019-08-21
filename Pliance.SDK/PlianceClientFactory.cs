@@ -16,12 +16,12 @@ namespace Pliance.SDK
 {
     public class PlianceClientFactory
     {
-        private string _secret;
-        private string _issuer;
-        private string _url;
-        private X509Certificate2 _certificate;
-        private Stack<HttpClient> _clients = new Stack<HttpClient>();
-        private AsyncMonitor _monitor = new AsyncMonitor();
+        private readonly string _secret;
+        private readonly string _issuer;
+        private readonly string _url;
+        private readonly X509Certificate2 _certificate;
+        private readonly Stack<HttpClient> _clients = new Stack<HttpClient>();
+        private readonly AsyncMonitor _monitor = new AsyncMonitor();
 
         public PlianceClientFactory(string secret, string issuer, string url, X509Certificate2 certificate = null, int poolSize = 8)
         {
@@ -58,11 +58,8 @@ namespace Pliance.SDK
             try
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", CreateJwtToken(givenName, subject));
+                
                 return await action(client);
-            }
-            catch (Exception)
-            {
-                throw;
             }
             finally
             {

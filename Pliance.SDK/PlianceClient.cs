@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Pliance.SDK.Contract;
 using Pliance.SDK.Exceptions;
+using ArgumentNullException = Pliance.SDK.Exceptions.ArgumentNullException;
 
 namespace Pliance.SDK
 {
@@ -22,6 +24,11 @@ namespace Pliance.SDK
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
 
+        private Task<T> Execute<T>(Func<HttpClient, Task<T>> action)
+        {
+            return _factory.Execute<T>(action, _givenName, _subject);
+        }
+        
         public async Task<RegisterPersonResponse> RegisterPerson(RegisterPersonCommand command)
         {
             if (command is null)
@@ -34,12 +41,18 @@ namespace Pliance.SDK
             return await Execute(async (client) =>
             {
                 var response = await client.PutAsync("api/PersonCommand", content);
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
                 var responseString = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<RegisterPersonResponse>(responseString);
 
                 if (!result.Success)
                 {
-                    throw new Exception(result.Message);
+                    throw new ApiException(result.Message);
                 }
 
                 return result;
@@ -58,12 +71,18 @@ namespace Pliance.SDK
             return await Execute(async (client) =>
             {
                 var response = await client.PostAsync("api/PersonCommand/Archive", content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
                 var responseString = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<ArchivePersonResponse>(responseString);
 
                 if (!result.Success)
                 {
-                    throw new Exception(result.Message);
+                    throw new ApiException(result.Message);
                 }
 
                 return result;
@@ -77,17 +96,23 @@ namespace Pliance.SDK
                 throw new ArgumentNullException(nameof(command));
             }
 
-            var json = JsonConvert.SerializeObject(command);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
             return await Execute(async (client) =>
             {
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
                 var response = await client.DeleteAsync("api/PersonCommand" + command.UrlEncoded());
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
                 var responseString = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<DeletePersonResponse>(responseString);
 
                 if (!result.Success)
                 {
-                    throw new Exception(result.Message);
+                    throw new ApiException(result.Message);
                 }
 
                 return result;
@@ -106,12 +131,18 @@ namespace Pliance.SDK
             return await Execute(async (client) =>
             {
                 var response = await client.PostAsync("api/PersonCommand/Classify", content);
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
                 var responseString = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<ClassifyHitResponse>(responseString);
 
                 if (!result.Success)
                 {
-                    throw new Exception(result.Message);
+                    throw new ApiException(result.Message);
                 }
 
                 return result;
@@ -124,7 +155,7 @@ namespace Pliance.SDK
             {
                 var response = await client.GetAsync("api/Ping");
 
-                if (response.StatusCode != HttpStatusCode.OK)
+                if (!response.IsSuccessStatusCode)
                 {
                     throw new ApiException(response.ReasonPhrase);
                 }
@@ -134,16 +165,11 @@ namespace Pliance.SDK
 
                 if (!result.Success)
                 {
-                    throw new Exception(result.Message);
+                    throw new ApiException(result.Message);
                 }
 
                 return result;
             });            
-        }
-
-        private Task<T> Execute<T>(Func<HttpClient, Task<T>> action)
-        {
-            return _factory.Execute<T>(action, _givenName, _subject);
         }
 
         public async Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery query)
@@ -156,12 +182,18 @@ namespace Pliance.SDK
             return await Execute(async (client) =>
             {
                 var response = await client.GetAsync("api/PersonQuery/Search/" + query.UrlEncoded());
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
                 var responseString = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<PersonSearchQueryResult>(responseString);
 
                 if (!result.Success)
                 {
-                    throw new Exception(result.Message);
+                    throw new ApiException(result.Message);
                 }
 
                 return result;
@@ -178,12 +210,18 @@ namespace Pliance.SDK
             return await Execute(async (client) =>
             {
                 var response = await client.GetAsync($"api/PersonQuery/" + query.UrlEncoded());
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
                 var responseString = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<ViewPersonQueryResult>(responseString);
 
                 if (!result.Success)
                 {
-                    throw new Exception(result.Message);
+                    throw new ApiException(result.Message);
                 }
 
                 return result;
@@ -202,12 +240,18 @@ namespace Pliance.SDK
             return await Execute(async (client) =>
             {
                 var response = await client.PostAsync("api/PersonCompany", content);
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
                 var responseString = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<RegisterCompanyResponse>(responseString);
 
                 if (!result.Success)
                 {
-                    throw new Exception(result.Message);
+                    throw new ApiException(result.Message);
                 }
 
                 return result;
@@ -222,16 +266,21 @@ namespace Pliance.SDK
             }
 
             var json = JsonConvert.SerializeObject(command);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
             return await Execute(async (client) =>
             {
                 var response = await client.DeleteAsync("api/PersonCompany/Archive" + command.UrlEncoded());
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
                 var responseString = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<DeleteCompanyResponse>(responseString);
 
                 if (!result.Success)
                 {
-                    throw new Exception(result.Message);
+                    throw new ApiException(result.Message);
                 }
 
                 return result;
@@ -250,12 +299,18 @@ namespace Pliance.SDK
             return await Execute(async (client) =>
             {
                 var response = await client.PostAsync("api/PersonCompany/Archive", content);
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
                 var responseString = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<ArchiveCompanyResponse>(responseString);
 
                 if (!result.Success)
                 {
-                    throw new Exception(result.Message);
+                    throw new ApiException(result.Message);
                 }
 
                 return result;
@@ -272,12 +327,18 @@ namespace Pliance.SDK
             return await Execute(async (client) =>
             {
                 var response = await client.GetAsync("api/CompanyQuery/Search/" + query.UrlEncoded());
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
                 var responseString = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<CompanySearchQueryResult>(responseString);
 
                 if (!result.Success)
                 {
-                    throw new Exception(result.Message);
+                    throw new ApiException(result.Message);
                 }
 
                 return result;
@@ -294,12 +355,18 @@ namespace Pliance.SDK
             return await Execute(async (client) =>
             {
                 var response = await client.GetAsync($"api/CompanyQuery/" + query.UrlEncoded());
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
                 var responseString = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<ViewCompanyQueryResult>(responseString);
 
                 if (!result.Success)
                 {
-                    throw new Exception(result.Message);
+                    throw new ApiException(result.Message);
                 }
 
                 return result;
