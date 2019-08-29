@@ -7,6 +7,7 @@ namespace Pliance.SDK
     {
         Task<RegisterPersonResponse> RegisterPerson(RegisterPersonCommand command);
         Task<ArchivePersonResponse> ArchivePerson(ArchivePersonCommand command);
+        Task<UnarchivePersonResponse> UnachivePerson(UnarchivePersonCommand command);
         Task<DeletePersonResponse> DeletePerson(DeletePersonCommand command);
         Task<ClassifyHitResponse> ClassifyPersonHit(ClassifyHitCommand command);
         Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery query);
