@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <PackageId>Pliance.NET-SDK</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>Adam Furtenbach, Tomas Einarsson</Authors>
     <Company>Plisec AB</Company>
   </PropertyGroup>
