@@ -89,7 +89,7 @@ namespace Pliance.SDK
             });
         }
         
-        public async Task<UnarchivePersonResponse> UnachivePerson(UnarchivePersonCommand command)
+        public async Task<UnarchivePersonResponse> UnarchivePerson(UnarchivePersonCommand command)
         {
             if (command is null)
             {
