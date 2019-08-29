@@ -269,7 +269,7 @@ namespace Pliance.SDK
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             return await Execute(async (client) =>
             {
-                var response = await client.PostAsync("api/PersonCompany", content);
+                var response = await client.PutAsync("api/CompanyCommand", content);
                 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -298,7 +298,7 @@ namespace Pliance.SDK
             var json = JsonConvert.SerializeObject(command);
             return await Execute(async (client) =>
             {
-                var response = await client.DeleteAsync("api/PersonCompany/Archive" + command.UrlEncoded());
+                var response = await client.DeleteAsync("api/CompanyCommand/Archive" + command.UrlEncoded());
                 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -328,7 +328,7 @@ namespace Pliance.SDK
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             return await Execute(async (client) =>
             {
-                var response = await client.PostAsync("api/PersonCompany/Archive", content);
+                var response = await client.PostAsync("api/CompanyCommand/Archive", content);
                 
                 if (!response.IsSuccessStatusCode)
                 {
