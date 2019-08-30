@@ -347,6 +347,36 @@ namespace Pliance.SDK
             });
         }
 
+        public async Task<UnarchiveCompanyResponse> UnarchiveCompany(UnarchiveCompanyCommand command)
+        {
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+
+            var json = JsonConvert.SerializeObject(command);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            return await Execute(async (client) =>
+            {
+                var response = await client.PostAsync("api/CompanyCommand/Unarchive", content);
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<UnarchiveCompanyResponse>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new ApiException(result.Message);
+                }
+
+                return result;
+            });
+        }
+
         public async Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery query)
         {
             if (query is null)
