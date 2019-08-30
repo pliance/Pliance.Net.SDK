@@ -13,5 +13,6 @@ namespace Pliance.SDK.Contract
         public List<Address> Addresses { get; set; }
         public List<List<Hit>> Hits { get; set; }
         public Gender Gender { get; set; }
+        public bool Archived { get; set; }
     }
 }

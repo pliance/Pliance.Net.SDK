@@ -10,5 +10,6 @@ namespace Pliance.SDK.Contract
         public string Name { get; set; }
         public Graph Graph { get; set; }
         public List<Beneficiary> Beneficiaries { get; set; }
+        public bool Archived { get; set; }
     }
 }

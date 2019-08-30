@@ -16,6 +16,7 @@ namespace Pliance.SDK
         Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command);
         Task<DeleteCompanyResponse> DeleteCompany(DeleteCompanyCommand command);
         Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command);
+        Task<UnarchiveCompanyResponse> UnarchiveCompany(UnarchiveCompanyCommand command);
         Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery request);
         Task<ViewCompanyQueryResult> ViewCompany(ViewCompanyQuery request);        
     }
