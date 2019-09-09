@@ -298,7 +298,7 @@ namespace Pliance.SDK
             var json = JsonConvert.SerializeObject(command);
             return await Execute(async (client) =>
             {
-                var response = await client.DeleteAsync("api/CompanyCommand/Archive" + command.UrlEncoded());
+                var response = await client.DeleteAsync("api/CompanyCommand" + command.UrlEncoded());
                 
                 if (!response.IsSuccessStatusCode)
                 {
