@@ -295,7 +295,6 @@ namespace Pliance.SDK
                 throw new ArgumentNullException(nameof(command));
             }
 
-            var json = JsonConvert.SerializeObject(command);
             return await Execute(async (client) =>
             {
                 var response = await client.DeleteAsync("api/CompanyCommand" + command.UrlEncoded());
