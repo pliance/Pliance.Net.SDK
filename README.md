@@ -56,3 +56,5 @@ var result = await client.ClassifyPersonHit(new ClassifyHitCommand
     Classification = ClassificationType.Positive
 });
 ```
+
+![Nuget](https://img.shields.io/nuget/v/Pliance.NET-SDK)
