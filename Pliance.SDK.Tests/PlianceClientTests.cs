@@ -9,6 +9,13 @@ namespace Pliance.SDK.Tests
 {
     public class PlianceClientTests
     {
+        private string _id;
+
+        public PlianceClientTests()
+        {
+            _id = Guid.NewGuid().ToString();
+        }
+
         [Fact]
         public async Task Api_Ping_Success()
         {
@@ -25,7 +32,7 @@ namespace Pliance.SDK.Tests
             var client = factory.Create("givenname", "sub");
             var result = await client.RegisterPerson(new RegisterPersonCommand()
             {
-                PersonReferenceId = "reference-id",
+                PersonReferenceId = _id,
                 FirstName = "Adam",
                 LastName = "Användare"
             });
@@ -47,9 +54,15 @@ namespace Pliance.SDK.Tests
         {
             var factory = CreateFactory();
             var client = factory.Create("givenname", "sub");
+            await client.RegisterPerson(new RegisterPersonCommand()
+            {
+                PersonReferenceId = _id,
+                FirstName = "Adam",
+                LastName = "Användare"
+            });            
             var result = await client.ArchivePerson(new ArchivePersonCommand
             {
-                PersonReferenceId = "reference-id"
+                PersonReferenceId = _id
             });
         }        
 
@@ -84,7 +97,7 @@ namespace Pliance.SDK.Tests
             return new PlianceClientFactory(
                 secret: "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b",
                 issuer: "Demo",
-                url: "https://adam.pliance.io/",
+                url: "https://secure.pliance.io/",
                 certificate: new X509Certificate2("client.pfx")
             );
         }
