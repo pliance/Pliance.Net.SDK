@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -15,5 +14,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Pliance.SDK\Pliance.SDK.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="client.pfx" Link="client.pfx" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>  
 
 </Project>
