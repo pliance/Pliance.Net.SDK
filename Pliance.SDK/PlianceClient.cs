@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Pliance.Core.Contract;
 using Pliance.SDK.Contract;
 using Pliance.SDK.Exceptions;
 using ArgumentNullException = Pliance.SDK.Exceptions.ArgumentNullException;
@@ -429,6 +430,70 @@ namespace Pliance.SDK
                 }
 
                 return result;
+            });
+        }
+
+        public async Task<WatchlistQueryResult> ViewWatchlistPerson(WatchlistQuery query)
+        {
+            if (query is null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            return await Execute(async (client) =>
+            {
+                var response = await client.GetAsync($"api/WatchlistQuery/" + query.UrlEncoded());
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = Deserialize<WatchlistQueryResult>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new ApiException(result.Message);
+                }
+
+                return result;
+            });
+        }
+
+        public async Task<WatchlistQueryResult_v2> ViewWatchlistPerson_v2(WatchlistQuery_v2 query)
+        {
+            if (query is null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            return await Execute(async (client) =>
+            {
+                var response = await client.GetAsync($"api/WatchlistQuery/v2/" + query.UrlEncoded());
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new ApiException(response.ReasonPhrase);
+                }
+                
+                var responseString = await response.Content.ReadAsStringAsync();
+                var result = Deserialize<WatchlistQueryResult_v2>(responseString);
+
+                if (!result.Success)
+                {
+                    throw new ApiException(result.Message);
+                }
+
+                return result;
+            });
+        }
+
+        private static T Deserialize<T>(string json)
+        {
+            return JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto,
             });
         }
     }
