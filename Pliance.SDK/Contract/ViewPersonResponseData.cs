@@ -14,5 +14,6 @@ namespace Pliance.SDK.Contract
         public List<List<Hit>> Hits { get; set; }
         public Gender Gender { get; set; }
         public bool Archived { get; set; }
+        public bool HighRiskCountry { get; set; }
     }
 }

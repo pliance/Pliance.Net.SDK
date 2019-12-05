@@ -11,5 +11,6 @@ namespace Pliance.SDK.Contract
         public Graph Graph { get; set; }
         public List<Beneficiary> Beneficiaries { get; set; }
         public bool Archived { get; set; }
+        public bool HighRiskCountry { get; set; }
     }
 }
