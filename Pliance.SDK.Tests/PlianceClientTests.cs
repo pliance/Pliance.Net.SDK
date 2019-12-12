@@ -96,7 +96,7 @@ namespace Pliance.SDK.Tests
             await CreatePerson();
             await _client.ViewWatchlistPerson_v2(new WatchlistQuery_v2
             {
-                Id = "Bogard-13935",
+                MatchId = "Bogard-13935",
                 PersonReferenceId = _id,
             });
         }
