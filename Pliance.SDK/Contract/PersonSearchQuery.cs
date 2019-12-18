@@ -4,6 +4,6 @@
     {
         public Page Page { get; set; }
         public Filter Filter { get; set; }
-        public string Query { get; set; } = "";
+        public string Query { get; set; }
     }
 }
