@@ -106,7 +106,7 @@ namespace Pliance.SDK.Tests
             return new PlianceClientFactory(
                 secret: "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b",
                 issuer: "Demo",
-                url: "https://secure.pliance.io/",
+                url: "https://local.pliance.io/",
                 certificate: new X509Certificate2("client.pfx")
             );
         }
