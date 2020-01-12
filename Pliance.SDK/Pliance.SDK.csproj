@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackageId>Pliance.NET-SDK</PackageId>
     <Version>1.0.3</Version>
     <Authors>Adam Furtenbach, Tomas Einarsson</Authors>
