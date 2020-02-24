@@ -30,7 +30,7 @@ namespace Pliance.SDK.Tests
         [Fact]
         public async Task Api_RegisterPerson_Success()
         {
-            await CreatePerson();
+            var person = await CreatePerson();
         }
 
         [Fact]
