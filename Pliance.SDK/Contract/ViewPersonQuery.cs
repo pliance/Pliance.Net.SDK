@@ -2,6 +2,6 @@
 {
     public class ViewPersonQuery
     {
-        public string PersonReferenceId { get; set; } = "";
+        public string PersonReferenceId { get; set; }
     }
 }

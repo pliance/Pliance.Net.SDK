@@ -1,4 +1,4 @@
-namespace Pliance.Core.Contract
+namespace Pliance.SDK.Contract
 {
     public class WatchlistQuery_v2
     {

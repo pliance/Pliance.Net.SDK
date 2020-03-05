@@ -5,7 +5,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Pliance.Core.Contract;
 using Pliance.SDK.Contract;
 using Pliance.SDK.Exceptions;
 using ArgumentNullException = Pliance.SDK.Exceptions.ArgumentNullException;

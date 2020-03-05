@@ -1,6 +1,6 @@
 namespace Pliance.SDK.Contract
 {
-    public class ViewCompanyQuery
+    public class CompanyGraphBeneficiariesQuery
     {
         public string CompanyReferenceId { get; set; }
     }

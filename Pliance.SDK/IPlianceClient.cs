@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Pliance.Core.Contract;
 using Pliance.SDK.Contract;
 
 namespace Pliance.SDK

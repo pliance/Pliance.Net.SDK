@@ -2,7 +2,6 @@
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Pliance.Core.Contract;
 using Pliance.SDK.Contract;
 using Xunit;
 

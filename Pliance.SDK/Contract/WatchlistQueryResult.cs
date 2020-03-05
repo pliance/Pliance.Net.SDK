@@ -1,9 +1,8 @@
-﻿using Pliance.SDK.Contract;
-using Pliance.SDK.Contract.Entities;
+﻿using Pliance.SDK.Contract.Entities;
 
-namespace Pliance.Core.Contract
+namespace Pliance.SDK.Contract
 {
-    public class WatchlistQueryResult : Response<ListPerson2>
+    public class WatchlistQueryResult : Response<ListPersonViewModel>
     {
     }
 }
