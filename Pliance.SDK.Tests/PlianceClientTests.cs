@@ -60,7 +60,7 @@ namespace Pliance.SDK.Tests
             {
                 PersonReferenceId = _id,
             });
-            var result = await _client.ClassifyPersonHit(new ClassifyHitCommand
+            var result = await _client.ClassifyPersonHit(new ClassifyPersonHitCommand
             {
                 PersonReferenceId = _id,
                 MatchId = person.Data.Hits[0][0].MatchId,

@@ -86,5 +86,10 @@ namespace Pliance.SDK
 
             return box;
         }
+
+        public static List<T> AsList<T>(T item)
+        {
+            return new List<T> {item};
+        }
     }
 }

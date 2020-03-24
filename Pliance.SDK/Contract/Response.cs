@@ -14,7 +14,6 @@ namespace Pliance.SDK.Contract
         public ResponseStatus Status { get; set; }
         public bool Success => Status == ResponseStatus.Success;
         public string Message { get; set; }
-        public string StackTrace { get; set; }
         public string Checkpoint { get; set; }
     }
 }

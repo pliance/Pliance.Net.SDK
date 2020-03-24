@@ -1,8 +1,8 @@
 namespace Pliance.SDK.Contract
 {
-    public class ClassifyHitCommand
+    public class ClassifyCompanyHitCommand
     {
-        public string PersonReferenceId { get; set; }
+        public string CompanyReferenceId { get; set; }
         public string MatchId { get; set; }        
         public string AliasId { get; set; }        
         public ClassificationType Classification { get; set; }        
