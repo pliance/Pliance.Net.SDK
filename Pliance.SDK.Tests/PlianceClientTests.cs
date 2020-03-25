@@ -31,6 +31,12 @@ namespace Pliance.SDK.Tests
         {
             var person = await CreatePerson();
         }
+        
+        [Fact]
+        public async Task Api_Feed_Success()
+        {
+            await _client.Feed(new FeedQuery());
+        }
 
         [Fact]
         public async Task Api_DeletePerson_Success()
