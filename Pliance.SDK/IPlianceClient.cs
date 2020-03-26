@@ -15,6 +15,7 @@ namespace Pliance.SDK
         Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery query);
     }
 
+    // !
     public interface ICompanyPlianceClient
     {
         Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command);
