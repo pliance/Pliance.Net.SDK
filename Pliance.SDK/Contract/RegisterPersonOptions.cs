@@ -4,5 +4,6 @@ namespace Pliance.SDK.Contract
     {
         public Order Order { get; set; }
         public Fuzziness Fuzziness { get; set; }
+        public bool OmitResult { get; set; }
     }
 }

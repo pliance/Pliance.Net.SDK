@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Pliance.SDK.Contract
 {
-    public class Hit
+    public class PersonHit
     {
         public string MatchId { get; set; }
         public List<TextMatch> MatchedFirstName { get; set; }

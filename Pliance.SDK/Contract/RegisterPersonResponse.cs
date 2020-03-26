@@ -7,6 +7,6 @@ namespace Pliance.SDK.Contract
     public class RegisterPersonResponse : Response<ViewPersonResponseData>
     {
         [Obsolete]
-        public List<List<Hit>> Hits { get; set; }
+        public List<List<PersonHit>> Hits { get; set; }
     }
 }

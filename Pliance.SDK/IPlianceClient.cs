@@ -3,6 +3,7 @@ using Pliance.SDK.Contract;
 
 namespace Pliance.SDK
 {
+    // !
     public interface IPersonPlianceClient
     {
         Task<RegisterPersonResponse> RegisterPerson(RegisterPersonCommand command);
@@ -41,6 +42,7 @@ namespace Pliance.SDK
         Task<WatchlistCompanyQueryResult> ViewWatchlistCompany(WatchlistCompanyQuery query);
     }
 
+    // !
     public interface IPlianceClient : IPersonPlianceClient, ICompanyPlianceClient, IPersonWatchlist, IFeedPlianceClient, ICompanyWatchlist
     {
         Task<PingResponse> Ping();

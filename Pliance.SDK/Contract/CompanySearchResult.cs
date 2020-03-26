@@ -10,5 +10,6 @@ namespace Pliance.SDK.Contract
         public bool IsRca { get; set; }
         public bool IsSanction { get; set; }
         public CompanyIdentity Identity { get; set; }
+        public bool Archived { get; set; }
     }    
 }
