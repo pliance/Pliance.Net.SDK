@@ -79,6 +79,21 @@ namespace Pliance.SDK
             return await ExecuteGet<PingResponse>("api/Ping");
         }
 
+        public async Task<WebhookUpdateResponse> SaveWebhook(WebhookUpdateCommand command)
+        {
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+
+            return await ExecutePost<WebhookUpdateResponse>("api/WebhookCommand", command);
+        }
+
+        public async Task<WebhookQueryResult> GetWebhook(WebhookQuery request)
+        {
+            return await ExecuteGet<WebhookQueryResult>("api/WebhookQuery");
+        }
+
         public async Task<FeedQueryResult> Feed(FeedQuery query)
         {
             if (query is null)
@@ -169,7 +184,7 @@ namespace Pliance.SDK
             return await ExecuteGet<ViewCompanyQueryResult>($"api/CompanyQuery/" + query.UrlEncoded());
         }
 
-        public async Task<WatchlistQueryResult> ViewWatchlistPerson(WatchlistQuery query)
+        public async Task<WatchlistQueryResult> WatchlistPerson(WatchlistQuery query)
         {
             if (query is null)
             {
@@ -179,7 +194,7 @@ namespace Pliance.SDK
             return await ExecuteGet<WatchlistQueryResult>($"api/WatchlistQuery/" + query.UrlEncoded());
         }
 
-        public async Task<WatchlistQueryResult_v2> ViewWatchlistPerson_v2(WatchlistQuery_v2 query)
+        public async Task<WatchlistQueryResult_v2> WatchlistPerson_v2(WatchlistQuery_v2 query)
         {
             if (query is null)
             {
@@ -199,7 +214,7 @@ namespace Pliance.SDK
             return await ExecutePost<ClassifyCompanyHitResponse>("api/CompanyCommand/Classify", command);
         }
 
-        public async Task<WatchlistCompanyQueryResult> ViewWatchlistCompany(WatchlistCompanyQuery query)
+        public async Task<WatchlistCompanyQueryResult> WatchlistCompany(WatchlistCompanyQuery query)
         {
             if (query is null)
             {

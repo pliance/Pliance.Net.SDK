@@ -27,10 +27,11 @@ namespace Pliance.SDK
         Task<ClassifyCompanyHitResponse> ClassifyCompanyHit(ClassifyCompanyHitCommand command);
     }
 
+    // !
     public interface IPersonWatchlist
     {
-        Task<WatchlistQueryResult> ViewWatchlistPerson(WatchlistQuery query);
-        Task<WatchlistQueryResult_v2> ViewWatchlistPerson_v2(WatchlistQuery_v2 query);
+        Task<WatchlistQueryResult> WatchlistPerson(WatchlistQuery query);
+        Task<WatchlistQueryResult_v2> WatchlistPerson_v2(WatchlistQuery_v2 query);
     }
 
     public interface IFeedPlianceClient
@@ -40,12 +41,14 @@ namespace Pliance.SDK
 
     public interface ICompanyWatchlist
     {
-        Task<WatchlistCompanyQueryResult> ViewWatchlistCompany(WatchlistCompanyQuery query);
+        Task<WatchlistCompanyQueryResult> WatchlistCompany(WatchlistCompanyQuery query);
     }
 
     // !
     public interface IPlianceClient : IPersonPlianceClient, ICompanyPlianceClient, IPersonWatchlist, IFeedPlianceClient, ICompanyWatchlist
     {
         Task<PingResponse> Ping();
+        Task<WebhookUpdateResponse> SaveWebhook(WebhookUpdateCommand command);
+        Task<WebhookQueryResult> GetWebhook(WebhookQuery request);
     }
 }

@@ -8,7 +8,7 @@ namespace Pliance.SDK.Contract
         public T Data { get; set; }
     }
 
-    public class Response
+    public abstract class Response
     {
         [JsonConverter(typeof(StringEnumConverter))]
         public ResponseStatus Status { get; set; }

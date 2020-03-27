@@ -87,7 +87,7 @@ namespace Pliance.SDK.Tests
         public async Task Api_WatchlistQuery_v1_Success()
         {
             await CreatePerson();
-            await _client.ViewWatchlistPerson(new WatchlistQuery
+            await _client.WatchlistPerson(new WatchlistQuery
             {
                 Id = "Bogard-13935",
                 FirstName = "",
@@ -99,7 +99,7 @@ namespace Pliance.SDK.Tests
         public async Task Api_WatchlistQuery_v2_Success()
         {
             await CreatePerson();
-            await _client.ViewWatchlistPerson_v2(new WatchlistQuery_v2
+            await _client.WatchlistPerson_v2(new WatchlistQuery_v2
             {
                 MatchId = "Bogard-13935",
                 PersonReferenceId = _id,
