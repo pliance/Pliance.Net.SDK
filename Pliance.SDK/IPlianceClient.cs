@@ -3,52 +3,34 @@ using Pliance.SDK.Contract;
 
 namespace Pliance.SDK
 {
-    // !
-    public interface IPersonPlianceClient
+    public interface IPlianceClient
     {
-        Task<RegisterPersonResponse> RegisterPerson(RegisterPersonCommand command);
-        Task<ArchivePersonResponse> ArchivePerson(ArchivePersonCommand command);
-        Task<UnarchivePersonResponse> UnarchivePerson(UnarchivePersonCommand command);
-        Task<DeletePersonResponse> DeletePerson(DeletePersonCommand command);
-        Task<ClassifyPersonHitResponse> ClassifyPersonHit(ClassifyPersonHitCommand command);
-        Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery query);
-        Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery query);
-    }
+        // @inject: interface
+		Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery query);
+		Task<ViewCompanyQueryResult> ViewCompany(ViewCompanyQuery query);
+		Task<CompanyGraphBeneficiariesResult> Beneficiaries(CompanyGraphBeneficiariesQuery query);
+		Task<FeedQueryResult> Feed(FeedQuery query);
+		Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery query);
+		Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery query);
+		Task<PingResponse> Ping(PingQuery query);
+		Task<ReportQueryResult> GetReport(ReportQuery query);
+		Task<WatchlistQueryResult> WatchlistPerson(WatchlistQuery query);
+		Task<WatchlistQueryResult_v2> WatchlistPerson_v2(WatchlistQuery_v2 query);
+		Task<WatchlistCompanyQueryResult> WatchlistCompany(WatchlistCompanyQuery query);
+		Task<WebhookQueryResult> GetWebhook(WebhookQuery query);
+		Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command);
+		Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command);
+		Task<UnarchiveCompanyResponse> UnarchiveCompany(UnarchiveCompanyCommand command);
+		Task<DeleteCompanyResponse> DeleteCompany(DeleteCompanyCommand command);
+		Task<ClassifyCompanyHitResponse> ClassifyCompanyHit(ClassifyCompanyHitCommand command);
+		Task<RegisterPersonResponse> RegisterPerson(RegisterPersonCommand command);
+		Task<ArchivePersonResponse> ArchivePerson(ArchivePersonCommand command);
+		Task<UnarchivePersonResponse> UnarchivePerson(UnarchivePersonCommand command);
+		Task<DeletePersonResponse> DeletePerson(DeletePersonCommand command);
+		Task<ClassifyPersonHitResponse> ClassifyPersonHit(ClassifyPersonHitCommand command);
+		Task<WebhookUpdateResponse> SaveWebhook(WebhookUpdateCommand command);
 
-    // !
-    public interface ICompanyPlianceClient
-    {
-        Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command);
-        Task<DeleteCompanyResponse> DeleteCompany(DeleteCompanyCommand command);
-        Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command);
-        Task<UnarchiveCompanyResponse> UnarchiveCompany(UnarchiveCompanyCommand command);
-        Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery request);
-        Task<ViewCompanyQueryResult> ViewCompany(ViewCompanyQuery request);
-        Task<ClassifyCompanyHitResponse> ClassifyCompanyHit(ClassifyCompanyHitCommand command);
-    }
-
-    // !
-    public interface IPersonWatchlist
-    {
-        Task<WatchlistQueryResult> WatchlistPerson(WatchlistQuery query);
-        Task<WatchlistQueryResult_v2> WatchlistPerson_v2(WatchlistQuery_v2 query);
-    }
-
-    public interface IFeedPlianceClient
-    {
-        Task<FeedQueryResult> Feed(FeedQuery query);
-    }
-
-    public interface ICompanyWatchlist
-    {
-        Task<WatchlistCompanyQueryResult> WatchlistCompany(WatchlistCompanyQuery query);
-    }
-
-    // !
-    public interface IPlianceClient : IPersonPlianceClient, ICompanyPlianceClient, IPersonWatchlist, IFeedPlianceClient, ICompanyWatchlist
-    {
-        Task<PingResponse> Ping();
-        Task<WebhookUpdateResponse> SaveWebhook(WebhookUpdateCommand command);
-        Task<WebhookQueryResult> GetWebhook(WebhookQuery request);
+        // @inject: !interface
     }
 }
+

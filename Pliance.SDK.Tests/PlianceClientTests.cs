@@ -23,7 +23,7 @@ namespace Pliance.SDK.Tests
         [Fact]
         public async Task Api_Ping_Success()
         {
-            await _client.Ping();
+            await _client.Ping(new PingQuery());
         }
 
         [Fact]
@@ -71,7 +71,7 @@ namespace Pliance.SDK.Tests
                 PersonReferenceId = _id,
                 MatchId = person.Data.Hits[0][0].MatchId,
                 AliasId = person.Data.Hits[0][0].AliasId,
-                Classification = ClassificationType.Positive
+                Classification = ClassificationType.Match,
             });
         }
 
@@ -123,7 +123,11 @@ namespace Pliance.SDK.Tests
                 PersonReferenceId = _id,
                 FirstName = "Ebba-Elisabeth",
                 LastName = "Busch",
-                Identity = new PersonIdentity("", "se"),
+                Identity = new PersonIdentity
+                {
+                    Country = "se",
+                    Identity = "",
+                },
             });
         }
     }
