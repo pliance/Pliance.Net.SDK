@@ -583,6 +583,5 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
-
     // @inject: !contracts
 }

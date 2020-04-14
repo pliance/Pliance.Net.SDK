@@ -136,4 +136,5 @@ tmp
 #id_rsa
 **/*.pfx
 Dockerfile
-Demo/**
+Demo/**.idea
+.idea
