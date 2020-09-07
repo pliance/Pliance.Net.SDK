@@ -45,16 +45,6 @@ namespace Pliance.SDK
 			return await ExecutePost<ArchivePersonResponse>("api/PersonCommand/Archive", command);
 		}
 
-		public async Task<CompanyGraphBeneficiariesResult> Beneficiaries(CompanyGraphBeneficiariesQuery request)
-		{
-			if (request is null)
-			{
-				throw new ArgumentNullException(nameof(request));
-			}
-
-			return await ExecuteGet<CompanyGraphBeneficiariesResult>("api/CompanyQuery/Graph/Beneficiaries" + request.UrlEncoded());
-		}
-
 		public async Task<ClassifyCompanyHitResponse> ClassifyCompanyHit(ClassifyCompanyHitCommand command)
 		{
 			if (command is null)
@@ -82,7 +72,7 @@ namespace Pliance.SDK
 				throw new ArgumentNullException(nameof(command));
 			}
 
-			return await ExecuteDelete<DeleteCompanyResponse>("api/CompanyCommand/" + command.UrlEncoded());
+			return await ExecuteDelete<DeleteCompanyResponse>("api/CompanyCommand" + command.UrlEncoded());
 		}
 
 		public async Task<DeletePersonResponse> DeletePerson(DeletePersonCommand command)
@@ -92,7 +82,7 @@ namespace Pliance.SDK
 				throw new ArgumentNullException(nameof(command));
 			}
 
-			return await ExecuteDelete<DeletePersonResponse>("api/PersonCommand/" + command.UrlEncoded());
+			return await ExecuteDelete<DeletePersonResponse>("api/PersonCommand" + command.UrlEncoded());
 		}
 
 		public async Task<FeedQueryResult> Feed(FeedQuery request)
@@ -102,7 +92,7 @@ namespace Pliance.SDK
 				throw new ArgumentNullException(nameof(request));
 			}
 
-			return await ExecuteGet<FeedQueryResult>("api/FeedQuery/" + request.UrlEncoded());
+			return await ExecuteGet<FeedQueryResult>("api/FeedQuery" + request.UrlEncoded());
 		}
 
 		public async Task<ReportQueryResult> GetReport(ReportQuery request)
@@ -112,7 +102,7 @@ namespace Pliance.SDK
 				throw new ArgumentNullException(nameof(request));
 			}
 
-			return await ExecuteGet<ReportQueryResult>("api/ReportQuery/" + request.UrlEncoded());
+			return await ExecuteGet<ReportQueryResult>("api/ReportQuery" + request.UrlEncoded());
 		}
 
 		public async Task<WebhookQueryResult> GetWebhook(WebhookQuery request)
@@ -122,7 +112,7 @@ namespace Pliance.SDK
 				throw new ArgumentNullException(nameof(request));
 			}
 
-			return await ExecuteGet<WebhookQueryResult>("api/WebhookQuery/" + request.UrlEncoded());
+			return await ExecuteGet<WebhookQueryResult>("api/WebhookQuery" + request.UrlEncoded());
 		}
 
 		public async Task<PingResponse> Ping(PingQuery request)
@@ -132,7 +122,7 @@ namespace Pliance.SDK
 				throw new ArgumentNullException(nameof(request));
 			}
 
-			return await ExecuteGet<PingResponse>("api/Ping/" + request.UrlEncoded());
+			return await ExecuteGet<PingResponse>("api/Ping" + request.UrlEncoded());
 		}
 
 		public async Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command)
@@ -142,7 +132,7 @@ namespace Pliance.SDK
 				throw new ArgumentNullException(nameof(command));
 			}
 
-			return await ExecutePut<RegisterCompanyResponse>("api/CompanyCommand/", command);
+			return await ExecutePut<RegisterCompanyResponse>("api/CompanyCommand", command);
 		}
 
 		public async Task<RegisterPersonResponse> RegisterPerson(RegisterPersonCommand command)
@@ -152,7 +142,7 @@ namespace Pliance.SDK
 				throw new ArgumentNullException(nameof(command));
 			}
 
-			return await ExecutePut<RegisterPersonResponse>("api/PersonCommand/", command);
+			return await ExecutePut<RegisterPersonResponse>("api/PersonCommand", command);
 		}
 
 		public async Task<WebhookUpdateResponse> SaveWebhook(WebhookUpdateCommand command)
@@ -162,7 +152,7 @@ namespace Pliance.SDK
 				throw new ArgumentNullException(nameof(command));
 			}
 
-			return await ExecutePut<WebhookUpdateResponse>("api/WebhookCommand/", command);
+			return await ExecutePut<WebhookUpdateResponse>("api/WebhookCommand", command);
 		}
 
 		public async Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery request)
@@ -212,7 +202,7 @@ namespace Pliance.SDK
 				throw new ArgumentNullException(nameof(request));
 			}
 
-			return await ExecuteGet<ViewCompanyQueryResult>("api/CompanyQuery/" + request.UrlEncoded());
+			return await ExecuteGet<ViewCompanyQueryResult>("api/CompanyQuery" + request.UrlEncoded());
 		}
 
 		public async Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery request)
@@ -222,7 +212,7 @@ namespace Pliance.SDK
 				throw new ArgumentNullException(nameof(request));
 			}
 
-			return await ExecuteGet<ViewPersonQueryResult>("api/PersonQuery/" + request.UrlEncoded());
+			return await ExecuteGet<ViewPersonQueryResult>("api/PersonQuery" + request.UrlEncoded());
 		}
 
 		public async Task<WatchlistCompanyQueryResult> WatchlistCompany(WatchlistCompanyQuery request)
@@ -242,17 +232,17 @@ namespace Pliance.SDK
 				throw new ArgumentNullException(nameof(request));
 			}
 
-			return await ExecuteGet<WatchlistQueryResult>("api/WatchlistQuery/" + request.UrlEncoded());
+			return await ExecuteGet<WatchlistQueryResult>("api/WatchlistQuery" + request.UrlEncoded());
 		}
 
-		public async Task<WatchlistQueryResult_v2> WatchlistPerson_v2(WatchlistQuery_v2 request)
+		public async Task<WatchlistQueryResultV2> WatchlistPersonV2(WatchlistQueryV2 request)
 		{
 			if (request is null)
 			{
 				throw new ArgumentNullException(nameof(request));
 			}
 
-			return await ExecuteGet<WatchlistQueryResult_v2>("api/WatchlistQuery/v2" + request.UrlEncoded());
+			return await ExecuteGet<WatchlistQueryResultV2>("api/WatchlistQuery/v2" + request.UrlEncoded());
 		}
 
         // @inject: !methods

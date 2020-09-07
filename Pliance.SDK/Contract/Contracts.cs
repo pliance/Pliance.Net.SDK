@@ -76,15 +76,6 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
-	public class CompanyGraphBeneficiariesQuery 
-	{
-		public string CompanyReferenceId { get; set; }
-	}
-
-	public class CompanyGraphBeneficiariesResult : ResponseGeneric<Graph> 
-	{
-	}
-
 	public class CompanyHit 
 	{
 		public string AliasId { get; set; }
@@ -93,6 +84,7 @@ namespace Pliance.SDK.Contract
 		public List<TextMatch> MatchedName { get; set; }
 		public string MatchId { get; set; }
 		public string Name { get; set; }
+		public Decimal Score { get; set; }
 	}
 
 	public class CompanyIdentity 
@@ -195,12 +187,6 @@ namespace Pliance.SDK.Contract
 		Female = 2,
 	}
 
-	public class Graph 
-	{
-		public List<Link> Links { get; set; }
-		public List<Node> Nodes { get; set; }
-	}
-
 	public class LastChanged 
 	{
 		public string Checkpoint { get; set; }
@@ -211,13 +197,6 @@ namespace Pliance.SDK.Contract
 	{
 		public object Hits { get; set; }
 		public string Name { get; set; }
-	}
-
-	public class Link 
-	{
-		public int Source { get; set; }
-		public int Target { get; set; }
-		public string Type { get; set; }
 	}
 
 	public class ListAddress 
@@ -250,8 +229,8 @@ namespace Pliance.SDK.Contract
 
 	public class ListCompanyViewModel 
 	{
-		public string CompanyReferenceId { get; set; }
 		public bool IsSanction { get; set; }
+		public string ListId { get; set; }
 		public List<ListCompanyNameViewModel> Names { get; set; }
 		public List<string> SanctionLists { get; set; }
 	}
@@ -267,9 +246,11 @@ namespace Pliance.SDK.Contract
 
 	public class ListPersonViewModel 
 	{
+		public bool Active { get; set; }
 		public List<ListAddress> Addresses { get; set; }
 		public List<ListBirthdate> Birthdates { get; set; }
 		public List<string> Countries { get; set; }
+		public bool Deceased { get; set; }
 		public Gender Gender { get; set; }
 		public List<string> Images { get; set; }
 		public bool IsPep { get; set; }
@@ -307,15 +288,6 @@ namespace Pliance.SDK.Contract
 		public string ToYear { get; set; }
 	}
 
-	public class Node 
-	{
-		public int Id { get; set; }
-		public bool IsPep { get; set; }
-		public string Name { get; set; }
-		public string Reference { get; set; }
-		public string Type { get; set; }
-	}
-
 	public enum Order
 	{
 		Any = 0,
@@ -329,7 +301,7 @@ namespace Pliance.SDK.Contract
 		public int? Size { get; set; }
 	}
 
-	public class PersonHit 
+	public class PersonDetailsHitModel 
 	{
 		public string AliasId { get; set; }
 		public ClassificationType Classification { get; set; }
@@ -341,6 +313,8 @@ namespace Pliance.SDK.Contract
 		public List<TextMatch> MatchedFirstName { get; set; }
 		public List<TextMatch> MatchedLastName { get; set; }
 		public string MatchId { get; set; }
+		public string ReferenceId { get; set; }
+		public Decimal Score { get; set; }
 	}
 
 	public class PersonIdentity 
@@ -428,11 +402,12 @@ namespace Pliance.SDK.Contract
 		public Fuzziness Fuzziness { get; set; }
 		public bool OmitResult { get; set; }
 		public Order Order { get; set; }
+		public List<string> PepCountries { get; set; }
 	}
 
 	public class RegisterPersonResponse : ResponseGeneric<ViewPersonResponseData> 
 	{
-		public List<List<PersonHit>> Hits { get; set; }
+		public List<List<PersonDetailsHitModel>> Hits { get; set; }
 	}
 
 	public class ReportQuery 
@@ -489,12 +464,16 @@ namespace Pliance.SDK.Contract
 		public bool Archived { get; set; }
 		public List<ViewPersonResponseData> Beneficiaries { get; set; }
 		public string CompanyReferenceId { get; set; }
+		public string CorporateForm { get; set; }
+		public string Description { get; set; }
 		public bool HighRiskCountry { get; set; }
 		public List<List<CompanyHit>> Hits { get; set; }
 		public CompanyIdentity Identity { get; set; }
 		public bool IsSanction { get; set; }
 		public LastChanged LastChanged { get; set; }
 		public string Name { get; set; }
+		public DateTime? RegistrationDate { get; set; }
+		public List<ViewPersonResponseData> Representatives { get; set; }
 	}
 
 	public class ViewPersonQuery 
@@ -516,7 +495,7 @@ namespace Pliance.SDK.Contract
 		public string FirstName { get; set; }
 		public Gender Gender { get; set; }
 		public bool HighRiskCountry { get; set; }
-		public List<List<PersonHit>> Hits { get; set; }
+		public List<List<PersonDetailsHitModel>> Hits { get; set; }
 		public PersonIdentity Identity { get; set; }
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
@@ -543,18 +522,18 @@ namespace Pliance.SDK.Contract
 		public string LastName { get; set; }
 	}
 
-	public class WatchlistQuery_v2 
-	{
-		public string MatchId { get; set; }
-		public string PersonReferenceId { get; set; }
-	}
-
 	public class WatchlistQueryResult : ResponseGeneric<ListPersonViewModel> 
 	{
 	}
 
-	public class WatchlistQueryResult_v2 : ResponseGeneric<ListPersonViewModel> 
+	public class WatchlistQueryResultV2 : ResponseGeneric<ListPersonViewModel> 
 	{
+	}
+
+	public class WatchlistQueryV2 
+	{
+		public string MatchId { get; set; }
+		public string PersonReferenceId { get; set; }
 	}
 
 	public class WebhookQuery 

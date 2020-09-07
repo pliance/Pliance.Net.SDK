@@ -58,7 +58,7 @@ namespace Pliance.SDK
             try
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", CreateJwtToken(givenName, subject));
-                
+
                 return await action(client);
             }
             finally
@@ -75,13 +75,18 @@ namespace Pliance.SDK
         {
             var handler = new HttpClientHandler();
 
-            handler.SslProtocols = SslProtocols.Tls12;
+            // handler.SslProtocols = SslProtocols.Tls12;
 
             if (_certificate != null)
             {
+                // handler.CheckCertificateRevocationList = false;
                 handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                // handler.ServerCertificateCustomValidationCallback = (message, certificate2, arg3, arg4) => true;
+                // handler.ClientCertificateOptions = ClientCertificateOption.Automatic;
                 handler.ClientCertificates.Add(_certificate);
             }
+
+            handler.AllowAutoRedirect = true;
 
             var client = new HttpClient(handler);
             client.BaseAddress = new Uri(_url);
