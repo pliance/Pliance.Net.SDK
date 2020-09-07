@@ -135,6 +135,160 @@ namespace Pliance.SDK.Tests
             Assert.True(response.Success);
         } 
         
+        [Fact]
+        public async Task TestWatchlistPersonV1()
+        {
+            var person = await CreatePerson();
+            var match = person.Data.Hits[0][0];
+            var response = await _client.WatchlistPerson(new WatchlistQuery
+            {
+                Id = match.MatchId,
+                FirstName = "Osama",
+                LastName = "bin Laden",
+            });
+            
+            Assert.True(response.Success);
+        }       
+        
+        [Fact]
+        public async Task TestWatchlistPersonV2()
+        {
+            var person = await CreatePerson();
+            var match = person.Data.Hits[0][0];
+            var response = await _client.WatchlistPersonV2(new WatchlistQueryV2
+            {
+                MatchId = match.MatchId,
+                PersonReferenceId = _id,
+            });
+            
+            Assert.True(response.Success);
+        }           
+        
+        [Fact]
+        public async Task TestFeed()
+        {
+            var response = await _client.Feed(new FeedQuery());
+            
+            Assert.True(response.Success);
+        }         
+        
+        [Fact]
+        public async Task TestSaveWebhook()
+        {
+            var response = await _client.SaveWebhook(new WebhookUpdateCommand
+            {
+                Enabled = true,
+                Secret = "secret",
+                Url = "https://url",
+            });
+            
+            Assert.True(response.Success);
+        } 
+        
+        [Fact]
+        public async Task TestGetWebhook()
+        {
+            var response = await _client.GetWebhook(new WebhookQuery());
+            
+            Assert.True(response.Success);
+        }         
+        
+              [Fact]
+        public async Task TestRegisterCompany()
+        {
+            var response = await CreateCompany();
+            
+            Assert.True(response.Success);
+        }
+        
+        [Fact]
+        public async Task TestArchiveCompany()
+        {
+            await CreateCompany();
+            var response = await ArchiveCompany();
+            
+            Assert.True(response.Success);
+        }
+
+        [Fact]
+        public async Task TestUnarchiveCompany()
+        {
+            await CreateCompany();
+            await ArchiveCompany();
+            var response = await _client.UnarchiveCompany(new UnarchiveCompanyCommand
+            {
+                CompanyReferenceId = _id,
+            });
+            
+            Assert.True(response.Success);
+        }
+        
+        [Fact]
+        public async Task TestDeleteCompany()
+        {
+            await CreateCompany();
+            var response = await _client.DeleteCompany(new DeleteCompanyCommand
+            {
+                CompanyReferenceId = _id,
+            });
+            
+            Assert.True(response.Success);
+        }
+        
+        [Fact]
+        public async Task TestViewCompany()
+        {
+            await CreateCompany();
+            var response = await _client.ViewCompany(new ViewCompanyQuery
+            {
+                CompanyReferenceId = _id,
+            });
+            
+            Assert.True(response.Success);
+        }   
+        
+        [Fact]
+        public async Task TestSearchCompany()
+        {
+            await CreateCompany();
+            var response = await _client.SearchCompany(new CompanySearchQuery
+            {
+                Query = "Daesong"
+            });
+            
+            Assert.True(response.Success);
+        } 
+        
+        [Fact]
+        public async Task TestClassifyCompany()
+        {
+            var company = await CreateCompany();
+            var match = company.Data.Hits[0][0];
+            var response = await _client.ClassifyCompanyHit(new ClassifyCompanyHitCommand
+            {
+                CompanyReferenceId = _id,
+                Classification = ClassificationType.FalsePositive,
+                AliasId = match.AliasId,
+                MatchId = match.MatchId,
+            });
+            
+            Assert.True(response.Success);
+        } 
+        
+        [Fact]
+        public async Task TestWatchlistCompany()
+        {
+            var company = await CreateCompany();
+            var match = company.Data.Hits[0][0];
+            var response = await _client.WatchlistCompany(new WatchlistCompanyQuery
+            {
+                MatchId = match.MatchId,
+                CompanyReferenceId = _id,
+            });
+            
+            Assert.True(response.Success);
+        }         
+        
         private async Task<RegisterPersonResponse> CreatePerson()
         {
             return await _client.RegisterPerson(new RegisterPersonCommand
@@ -142,6 +296,15 @@ namespace Pliance.SDK.Tests
                 PersonReferenceId = _id,
                 FirstName = "Osama",
                 LastName = "bin Laden",
+            });
+        }
+        
+        private async Task<RegisterCompanyResponse> CreateCompany()
+        {
+            return await _client.RegisterCompany(new RegisterCompanyCommand
+            {
+                CompanyReferenceId = _id,
+                Name = "Korea Daesong Bank",
             });
         }
 
@@ -152,99 +315,14 @@ namespace Pliance.SDK.Tests
                 PersonReferenceId = _id,
             });
         }
-
-        //         public PlianceClientTests()
-        //         {
-        //             _id = Guid.NewGuid().ToString();
-        //             _factory = CreateFactory();
-        //             _client = _factory.Create("givenname", "sub");
-        //         }
-
-        //         [Fact]
-        //         public async Task Api_Ping_Success()
-        //         {
-        //             await _client.Ping(new PingQuery());
-        //         }
-
-        //         [Fact]
-        //         public async Task Api_RegisterPerson_Success()
-        //         {
-        //             var person = await CreatePerson();
-        //         }
-
-        //         [Fact]
-        //         public async Task Api_Feed_Success()
-        //         {
-        //             await _client.Feed(new FeedQuery());
-        //         }
-
-        //         [Fact]
-        //         public async Task Api_DeletePerson_Success()
-        //         {
-        //             await CreatePerson();
-        //             var result = await _client.DeletePerson(new DeletePersonCommand
-        //             {
-        //                 PersonReferenceId = _id
-        //             });
-        //         }
-
-        //         [Fact]
-        //         public async Task Api_ArchivePerson_Success()
-        //         {
-        //             await CreatePerson();            
-        //             var result = await _client.ArchivePerson(new ArchivePersonCommand
-        //             {
-        //                 PersonReferenceId = _id
-        //             });
-        //         }
-
-        //         [Fact]
-        //         public async Task Api_ClassifyPerson_Success()
-        //         {
-        //             await CreatePerson();
-        //             var person = await _client.ViewPerson(new ViewPersonQuery
-        //             {
-        //                 PersonReferenceId = _id,
-        //             });
-        //             var result = await _client.ClassifyPersonHit(new ClassifyPersonHitCommand
-        //             {
-        //                 PersonReferenceId = _id,
-        //                 MatchId = person.Data.Hits[0][0].MatchId,
-        //                 AliasId = person.Data.Hits[0][0].AliasId,
-        //                 Classification = ClassificationType.Match,
-        //             });
-        //         }
-
-        //         [Fact]
-        //         public async Task Api_SearchPerson_Success()
-        //         {
-        //             var result = await _client.SearchPerson(new PersonSearchQuery());
-
-        // //            Console.WriteLine(JsonConvert.SerializeObject(result));
-        //         }
-
-        //         [Fact]
-        //         public async Task Api_WatchlistQuery_v1_Success()
-        //         {
-        //             await CreatePerson();
-        //             await _client.WatchlistPerson(new WatchlistQuery
-        //             {
-        //                 Id = "Bogard-13935",
-        //                 FirstName = "",
-        //                 LastName = "",
-        //             });
-        //         }
-
-        //         [Fact]
-        //         public async Task Api_WatchlistQuery_v2_Success()
-        //         {
-        //             await CreatePerson();
-        //             await _client.WatchlistPersonV2(new WatchlistQueryV2
-        //             {
-        //                 MatchId = "Bogard-13935",
-        //                 PersonReferenceId = _id,
-        //             });
-        //         }
+        
+        private async Task<ArchiveCompanyResponse> ArchiveCompany()
+        {
+            return await _client.ArchiveCompany(new ArchiveCompanyCommand
+            {
+                CompanyReferenceId = _id,
+            });
+        }
 
         private IPlianceClient CreateClient()
         {
@@ -263,20 +341,5 @@ namespace Pliance.SDK.Tests
                 certificate: _x509Certificate2
             );
         }
-
-        //         private async Task<RegisterPersonResponse> CreatePerson()
-        //         {
-        //             return await _client.RegisterPerson(new RegisterPersonCommand
-        //             {
-        //                 PersonReferenceId = _id,
-        //                 FirstName = "Ebba-Elisabeth",
-        //                 LastName = "Busch",
-        //                 Identity = new PersonIdentity
-        //                 {
-        //                     Country = "se",
-        //                     Identity = "",
-        //                 },
-        //             });
-        //         }
     }
 }
