@@ -76,6 +76,11 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
+	public class CompanyFilter 
+	{
+		public bool? IsSanction { get; set; }
+	}
+
 	public class CompanyHit 
 	{
 		public string AliasId { get; set; }
@@ -93,9 +98,35 @@ namespace Pliance.SDK.Contract
 		public string Identity { get; set; }
 	}
 
+	public class CompanyReportPost 
+	{
+		public string Activity { get; set; }
+		public string CompanyReferenceId { get; set; }
+		public DateTime Date { get; set; }
+		public string Details { get; set; }
+		public string Identity { get; set; }
+		public string Name { get; set; }
+	}
+
+	public class CompanyReportQuery 
+	{
+		public string CompanyReferenceId { get; set; }
+		public DateTime? From { get; set; }
+		public DateTime? To { get; set; }
+	}
+
+	public class CompanyReportQueryResult : ResponseGeneric<CompanyReportQueryResultData> 
+	{
+	}
+
+	public class CompanyReportQueryResultData 
+	{
+		public List<CompanyReportPost> Result { get; set; }
+	}
+
 	public class CompanySearchQuery 
 	{
-		public Filter Filter { get; set; }
+		public CompanyFilter Filter { get; set; }
 		public Page Page { get; set; }
 		public string Query { get; set; }
 	}
@@ -177,7 +208,7 @@ namespace Pliance.SDK.Contract
 	{
 		Metaphone = 0,
 		Simple = 1,
-		Diacritics = 2,
+		Metaphone3 = 4,
 	}
 
 	public enum Gender
@@ -185,6 +216,21 @@ namespace Pliance.SDK.Contract
 		Unknown = 0,
 		Male = 1,
 		Female = 2,
+	}
+
+	public class GeneralReportQuery 
+	{
+		public DateTime? From { get; set; }
+		public DateTime? To { get; set; }
+	}
+
+	public class GeneralReportQueryResult : ResponseGeneric<GeneralReportQueryResultData> 
+	{
+	}
+
+	public class GeneralReportQueryResultData 
+	{
+		public List<ReportPost> Result { get; set; }
 	}
 
 	public class LastChanged 
@@ -330,6 +376,32 @@ namespace Pliance.SDK.Contract
 		public object Persons { get; set; }
 	}
 
+	public class PersonReportPost 
+	{
+		public string Activity { get; set; }
+		public DateTime Date { get; set; }
+		public string Details { get; set; }
+		public string Identity { get; set; }
+		public string Name { get; set; }
+		public string PersonReferenceId { get; set; }
+	}
+
+	public class PersonReportQuery 
+	{
+		public DateTime? From { get; set; }
+		public string PersonReferenceId { get; set; }
+		public DateTime? To { get; set; }
+	}
+
+	public class PersonReportQueryResult : ResponseGeneric<PersonReportQueryResultData> 
+	{
+	}
+
+	public class PersonReportQueryResultData 
+	{
+		public List<PersonReportPost> Result { get; set; }
+	}
+
 	public class PersonSearchQuery 
 	{
 		public Filter Filter { get; set; }
@@ -363,6 +435,14 @@ namespace Pliance.SDK.Contract
 	}
 
 	public class PingResponse : Response 
+	{
+	}
+
+	public class PublishBlockchainCommand 
+	{
+	}
+
+	public class PublishBlockchainResponse : Response 
 	{
 	}
 
@@ -408,6 +488,15 @@ namespace Pliance.SDK.Contract
 	public class RegisterPersonResponse : ResponseGeneric<ViewPersonResponseData> 
 	{
 		public List<List<PersonDetailsHitModel>> Hits { get; set; }
+	}
+
+	public class ReportPost 
+	{
+		public string Activity { get; set; }
+		public DateTime Date { get; set; }
+		public string Details { get; set; }
+		public string Identity { get; set; }
+		public string Name { get; set; }
 	}
 
 	public class ReportQuery 

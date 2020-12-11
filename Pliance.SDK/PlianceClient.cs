@@ -95,6 +95,16 @@ namespace Pliance.SDK
 			return await ExecuteGet<FeedQueryResult>("api/FeedQuery" + request.UrlEncoded());
 		}
 
+		public async Task<PersonReportQueryResult> GetPersonReport(PersonReportQuery request)
+		{
+			if (request is null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
+			return await ExecuteGet<PersonReportQueryResult>("api/ReportQuery/PersonReport" + request.UrlEncoded());
+		}
+
 		public async Task<ReportQueryResult> GetReport(ReportQuery request)
 		{
 			if (request is null)
@@ -103,6 +113,26 @@ namespace Pliance.SDK
 			}
 
 			return await ExecuteGet<ReportQueryResult>("api/ReportQuery" + request.UrlEncoded());
+		}
+
+		public async Task<GeneralReportQueryResult> GetReport(GeneralReportQuery request)
+		{
+			if (request is null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
+			return await ExecuteGet<GeneralReportQueryResult>("api/ReportQuery/GeneralReport" + request.UrlEncoded());
+		}
+
+		public async Task<CompanyReportQueryResult> GetReport(CompanyReportQuery request)
+		{
+			if (request is null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
+			return await ExecuteGet<CompanyReportQueryResult>("api/ReportQuery/CompanyReport" + request.UrlEncoded());
 		}
 
 		public async Task<WebhookQueryResult> GetWebhook(WebhookQuery request)
@@ -123,6 +153,16 @@ namespace Pliance.SDK
 			}
 
 			return await ExecuteGet<PingResponse>("api/Ping" + request.UrlEncoded());
+		}
+
+		public async Task<PublishBlockchainResponse> Post(PublishBlockchainCommand command)
+		{
+			if (command is null)
+			{
+				throw new ArgumentNullException(nameof(command));
+			}
+
+			return await ExecutePost<PublishBlockchainResponse>("internal/api/PublishBlockchain", command);
 		}
 
 		public async Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command)
