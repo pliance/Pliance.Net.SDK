@@ -49,6 +49,10 @@ namespace Pliance.SDK
             {
                 map[path] = obj;
             }
+            else if (prop?.PropertyType == typeof(DateTime))
+            {
+                map[path] = ((DateTime) obj).ToString("o");
+            }
             else if (prop?.PropertyType.IsGenericType == true && prop?.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 object unwrapped = obj;
