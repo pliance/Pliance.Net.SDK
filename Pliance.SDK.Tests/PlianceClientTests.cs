@@ -25,6 +25,17 @@ namespace Pliance.SDK.Tests
         }
 
         [Fact]
+        public async Task PingCeritficateWithPassword()
+        {
+            _x509Certificate2 = new X509Certificate2("client-password.pfx", "password");
+            _url = "https://local-no-cert.pliance.io/";
+            
+            var client = CreateClient();
+            
+            await client.Ping(new PingQuery());
+        }        
+
+        [Fact]
         public async Task BadRequest()
         {
             await Assert.ThrowsAsync<Pliance.SDK.Exceptions.ApiException>(async () =>
