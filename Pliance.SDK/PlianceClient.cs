@@ -16,11 +16,13 @@ namespace Pliance.SDK
         private readonly PlianceClientFactory _factory;
         private readonly string _givenName;
         private readonly string _subject;
+        private readonly string _tenant;
 
-        public PlianceClient(PlianceClientFactory factory, string givenName, string subject)
+        public PlianceClient(PlianceClientFactory factory, string givenName, string subject, string tenant)
         {
             _subject = subject;
             _givenName = givenName;
+            _tenant = tenant;
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
 
