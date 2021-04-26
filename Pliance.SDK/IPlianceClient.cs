@@ -12,10 +12,9 @@ namespace Pliance.SDK
 		Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery request);
 		Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery request);
 		Task<PingResponse> Ping(PingQuery request);
-		Task<ReportQueryResult> GetReport(ReportQuery request);
 		Task<PersonReportQueryResult> GetPersonReport(PersonReportQuery request);
-		Task<GeneralReportQueryResult> GetReport(GeneralReportQuery request);
-		Task<CompanyReportQueryResult> GetReport(CompanyReportQuery request);
+		Task<GeneralReportQueryResult> GetGeneralReport(GeneralReportQuery request);
+		Task<CompanyReportQueryResult> GetCompanyReport(CompanyReportQuery request);
 		Task<WatchlistQueryResult> WatchlistPerson(WatchlistQuery request);
 		Task<WatchlistQueryResultV2> WatchlistPersonV2(WatchlistQueryV2 request);
 		Task<WatchlistCompanyQueryResult> WatchlistCompany(WatchlistCompanyQuery request);
@@ -30,7 +29,6 @@ namespace Pliance.SDK
 		Task<UnarchivePersonResponse> UnarchivePerson(UnarchivePersonCommand command);
 		Task<DeletePersonResponse> DeletePerson(DeletePersonCommand command);
 		Task<ClassifyPersonHitResponse> ClassifyPersonHit(ClassifyPersonHitCommand command);
-		Task<PublishBlockchainResponse> Post(PublishBlockchainCommand command);
 		Task<WebhookUpdateResponse> SaveWebhook(WebhookUpdateCommand command);
         // @inject: !interface
     }

@@ -32,17 +32,17 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
+	public enum BirthMatchType
+	{
+		Date = 0,
+		Range = 1,
+	}
+
 	public class Birthdate 
 	{
 		public int? Day { get; set; }
 		public int? Month { get; set; }
 		public int? Year { get; set; }
-	}
-
-	public enum BirthMatchType
-	{
-		Date = 0,
-		Range = 1,
 	}
 
 	public enum ClassificationType
@@ -86,8 +86,8 @@ namespace Pliance.SDK.Contract
 		public string AliasId { get; set; }
 		public ClassificationType Classification { get; set; }
 		public bool IsSanction { get; set; }
-		public List<TextMatch> MatchedName { get; set; }
 		public string MatchId { get; set; }
+		public List<TextMatch> MatchedName { get; set; }
 		public string Name { get; set; }
 		public Decimal Score { get; set; }
 	}
@@ -239,12 +239,6 @@ namespace Pliance.SDK.Contract
 		public DateTime TimestampUtc { get; set; }
 	}
 
-	public class LegalPerson 
-	{
-		public object Hits { get; set; }
-		public string Name { get; set; }
-	}
-
 	public class ListAddress 
 	{
 		public string City { get; set; }
@@ -356,9 +350,9 @@ namespace Pliance.SDK.Contract
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
 		public string LastName { get; set; }
+		public string MatchId { get; set; }
 		public List<TextMatch> MatchedFirstName { get; set; }
 		public List<TextMatch> MatchedLastName { get; set; }
-		public string MatchId { get; set; }
 		public string ReferenceId { get; set; }
 		public Decimal Score { get; set; }
 	}
@@ -367,13 +361,6 @@ namespace Pliance.SDK.Contract
 	{
 		public string Country { get; set; }
 		public string Identity { get; set; }
-	}
-
-	public class PersonReport 
-	{
-		public string Country { get; set; }
-		public List<LegalPerson> LegalPersons { get; set; }
-		public object Persons { get; set; }
 	}
 
 	public class PersonReportPost 
@@ -438,14 +425,6 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
-	public class PublishBlockchainCommand 
-	{
-	}
-
-	public class PublishBlockchainResponse : Response 
-	{
-	}
-
 	public class RegisterCompanyCommand 
 	{
 		public string CompanyReferenceId { get; set; }
@@ -458,6 +437,7 @@ namespace Pliance.SDK.Contract
 	{
 		public Fuzziness Fuzziness { get; set; }
 		public bool OmitResult { get; set; }
+		public bool OmitUbo { get; set; }
 		public Order Order { get; set; }
 	}
 
@@ -497,16 +477,6 @@ namespace Pliance.SDK.Contract
 		public string Details { get; set; }
 		public string Identity { get; set; }
 		public string Name { get; set; }
-	}
-
-	public class ReportQuery 
-	{
-	}
-
-	public class ReportQueryResult : Response 
-	{
-		public List<string> HighRiskCountries { get; set; }
-		public List<PersonReport> PersonReports { get; set; }
 	}
 
 	public enum ResponseStatus
