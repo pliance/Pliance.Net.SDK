@@ -31,6 +31,7 @@ namespace Pliance.SDK
 		Task<ClassifyPersonHitResponse> ClassifyPersonHit(ClassifyPersonHitCommand command);
 		Task<WebhookUpdateResponse> SaveWebhook(WebhookUpdateCommand command);
         // @inject: !interface
+        IPlianceClient WithRequestId(string requestId);
     }
 }
 

@@ -1,7 +1,5 @@
 using System;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -17,6 +15,7 @@ namespace Pliance.SDK
         private readonly string _givenName;
         private readonly string _subject;
         private readonly string _tenant;
+        private string _requestId;
 
         public PlianceClient(PlianceClientFactory factory, string givenName, string subject, string tenant)
         {
@@ -269,6 +268,12 @@ namespace Pliance.SDK
 
         // @inject: !methods
 
+        public IPlianceClient WithRequestId(string requestId)
+        {
+	        _requestId = requestId;
+	        return this;
+        }        
+
         private async Task<T> ExecuteGet<T>(string path)
             where T : Response
         {
@@ -288,7 +293,14 @@ namespace Pliance.SDK
             Func<HttpClient, Task<T>> action = async (client) =>
             {
                 var json = JsonConvert.SerializeObject(input);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");                
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                if (!string.IsNullOrEmpty(_requestId))
+                {
+	                client.DefaultRequestHeaders.Remove("X-Request-Id");
+	                client.DefaultRequestHeaders.Add("X-Request-Id", _requestId);
+                }
+                
                 var response = await client.PostAsync(path, content);
 
                 return await HandleResponse<T>(response);
@@ -304,7 +316,14 @@ namespace Pliance.SDK
             Func<HttpClient, Task<T>> action = async (client) =>
             {
                 var json = JsonConvert.SerializeObject(input);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");                
+                var content = new StringContent(json, Encoding.UTF8, "application/json"); 
+                
+                if (!string.IsNullOrEmpty(_requestId))
+                {
+	                client.DefaultRequestHeaders.Remove("X-Request-Id");
+	                client.DefaultRequestHeaders.Add("X-Request-Id", _requestId);
+                }                
+                
                 var response = await client.PutAsync(path, content);
 
                 return await HandleResponse<T>(response);

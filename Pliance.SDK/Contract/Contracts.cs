@@ -208,7 +208,6 @@ namespace Pliance.SDK.Contract
 	{
 		Metaphone = 0,
 		Simple = 1,
-		Metaphone3 = 4,
 	}
 
 	public enum Gender
@@ -337,8 +336,8 @@ namespace Pliance.SDK.Contract
 
 	public class Page 
 	{
-		public int? No { get; set; }
-		public int? Size { get; set; }
+		public int No { get; set; }
+		public int Size { get; set; }
 	}
 
 	public class PersonDetailsHitModel 
@@ -437,8 +436,9 @@ namespace Pliance.SDK.Contract
 	{
 		public Fuzziness Fuzziness { get; set; }
 		public bool OmitResult { get; set; }
-		public bool OmitUbo { get; set; }
+		public bool OmitUltimateBenefitOwner { get; set; }
 		public Order Order { get; set; }
+		public bool ValidateCompany { get; set; }
 	}
 
 	public class RegisterCompanyResponse : ResponseGeneric<ViewCompanyResponseData> 
