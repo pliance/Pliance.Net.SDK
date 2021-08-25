@@ -4,6 +4,11 @@ using System.Collections.Generic;
 namespace Pliance.SDK.Contract
 {
     // @inject: contracts
+	public enum ActivityType
+	{
+		Matched = 0,
+	}
+
 	public class Address 
 	{
 		public string City { get; set; }
@@ -76,6 +81,12 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
+	public class Company 
+	{
+		public string Identity { get; set; }
+		public string Name { get; set; }
+	}
+
 	public class CompanyFilter 
 	{
 		public bool? IsSanction { get; set; }
@@ -98,9 +109,27 @@ namespace Pliance.SDK.Contract
 		public string Identity { get; set; }
 	}
 
+	public class CompanyOwner 
+	{
+		public string Name { get; set; }
+		public string OrganizationNumber { get; set; }
+		public Decimal? Shares { get; set; }
+		public Decimal Stake { get; set; }
+		public Decimal? Votes { get; set; }
+	}
+
+	public class CompanyOwnership 
+	{
+		public List<CompanyOwner> CompanyOwners { get; set; }
+		public bool HasForeignUltimateParent { get; set; }
+		public Company ParentCompany { get; set; }
+		public List<PersonOwner> PersonOwners { get; set; }
+		public Company UltimateParentCompany { get; set; }
+	}
+
 	public class CompanyReportPost 
 	{
-		public string Activity { get; set; }
+		public ActivityType Activity { get; set; }
 		public string CompanyReferenceId { get; set; }
 		public DateTime Date { get; set; }
 		public string Details { get; set; }
@@ -202,6 +231,7 @@ namespace Pliance.SDK.Contract
 		public bool? IsPep { get; set; }
 		public bool? IsRca { get; set; }
 		public bool? IsSanction { get; set; }
+		public bool? IsSip { get; set; }
 	}
 
 	public enum Fuzziness
@@ -295,6 +325,7 @@ namespace Pliance.SDK.Contract
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
+		public bool IsSip { get; set; }
 		public string ListId { get; set; }
 		public List<string> Lists { get; set; }
 		public List<ListPersonNameViewModel> Names { get; set; }
@@ -310,6 +341,7 @@ namespace Pliance.SDK.Contract
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
+		public bool IsSip { get; set; }
 		public string LastName { get; set; }
 		public string RelationPersonId { get; set; }
 		public string RelationType { get; set; }
@@ -348,6 +380,7 @@ namespace Pliance.SDK.Contract
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
+		public bool IsSip { get; set; }
 		public string LastName { get; set; }
 		public string MatchId { get; set; }
 		public List<TextMatch> MatchedFirstName { get; set; }
@@ -362,9 +395,19 @@ namespace Pliance.SDK.Contract
 		public string Identity { get; set; }
 	}
 
+	public class PersonOwner 
+	{
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string NationalIdentityNumber { get; set; }
+		public Decimal? Shares { get; set; }
+		public Decimal Stake { get; set; }
+		public Decimal? Votes { get; set; }
+	}
+
 	public class PersonReportPost 
 	{
-		public string Activity { get; set; }
+		public ActivityType Activity { get; set; }
 		public DateTime Date { get; set; }
 		public string Details { get; set; }
 		public string Identity { get; set; }
@@ -412,6 +455,7 @@ namespace Pliance.SDK.Contract
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
+		public bool IsSip { get; set; }
 		public List<TextMatch> LastName { get; set; }
 		public string PersonReferenceId { get; set; }
 	}
@@ -472,7 +516,7 @@ namespace Pliance.SDK.Contract
 
 	public class ReportPost 
 	{
-		public string Activity { get; set; }
+		public ActivityType Activity { get; set; }
 		public DateTime Date { get; set; }
 		public string Details { get; set; }
 		public string Identity { get; set; }
@@ -509,6 +553,36 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
+	public class ViewCompanyOwnershipQuery 
+	{
+		public string Identity { get; set; }
+	}
+
+	public class ViewCompanyOwnershipQueryResult : ResponseGeneric<CompanyOwnership> 
+	{
+	}
+
+	public class ViewCompanyPersonResponse 
+	{
+		public List<Address> Addresses { get; set; }
+		public bool Archived { get; set; }
+		public Birthdate Birth { get; set; }
+		public string Birthdate { get; set; }
+		public List<EngagementModel> Engagements { get; set; }
+		public string FirstName { get; set; }
+		public Gender Gender { get; set; }
+		public bool HighRiskCountry { get; set; }
+		public List<List<PersonDetailsHitModel>> Hits { get; set; }
+		public PersonIdentity Identity { get; set; }
+		public bool IsPep { get; set; }
+		public bool IsRca { get; set; }
+		public bool IsSanction { get; set; }
+		public bool IsSip { get; set; }
+		public LastChanged LastChanged { get; set; }
+		public string LastName { get; set; }
+		public string PersonReferenceId { get; set; }
+	}
+
 	public class ViewCompanyQuery 
 	{
 		public string CompanyReferenceId { get; set; }
@@ -521,7 +595,7 @@ namespace Pliance.SDK.Contract
 	public class ViewCompanyResponseData 
 	{
 		public bool Archived { get; set; }
-		public List<ViewPersonResponseData> Beneficiaries { get; set; }
+		public List<ViewCompanyPersonResponse> Beneficiaries { get; set; }
 		public string CompanyReferenceId { get; set; }
 		public string CorporateForm { get; set; }
 		public string Description { get; set; }
@@ -550,7 +624,6 @@ namespace Pliance.SDK.Contract
 		public bool Archived { get; set; }
 		public Birthdate Birth { get; set; }
 		public string Birthdate { get; set; }
-		public List<EngagementModel> Engagements { get; set; }
 		public string FirstName { get; set; }
 		public Gender Gender { get; set; }
 		public bool HighRiskCountry { get; set; }
@@ -559,6 +632,7 @@ namespace Pliance.SDK.Contract
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
+		public bool IsSip { get; set; }
 		public LastChanged LastChanged { get; set; }
 		public string LastName { get; set; }
 		public string PersonReferenceId { get; set; }

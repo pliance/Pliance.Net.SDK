@@ -136,6 +136,16 @@ namespace Pliance.SDK
 			return await ExecuteGet<WebhookQueryResult>("api/WebhookQuery" + request.UrlEncoded());
 		}
 
+		public async Task<ViewCompanyOwnershipQueryResult> Ownership(ViewCompanyOwnershipQuery request)
+		{
+			if (request is null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
+			return await ExecuteGet<ViewCompanyOwnershipQueryResult>("api/CompanyQuery/Ownership" + request.UrlEncoded());
+		}
+
 		public async Task<PingResponse> Ping(PingQuery request)
 		{
 			if (request is null)
