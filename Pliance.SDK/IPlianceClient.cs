@@ -8,7 +8,7 @@ namespace Pliance.SDK
         // @inject: interface
 		Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery request);
 		Task<ViewCompanyQueryResult> ViewCompany(ViewCompanyQuery request);
-		Task<ViewCompanyOwnershipQueryResult> Ownership(ViewCompanyOwnershipQuery request);
+		Task<ViewCompanyDataQueryResult> CompanyData(ViewCompanyDataQuery request);
 		Task<FeedQueryResult> Feed(FeedQuery request);
 		Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery request);
 		Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery request);
@@ -20,6 +20,7 @@ namespace Pliance.SDK
 		Task<WatchlistQueryResultV2> WatchlistPersonV2(WatchlistQueryV2 request);
 		Task<WatchlistCompanyQueryResult> WatchlistCompany(WatchlistCompanyQuery request);
 		Task<WebhookQueryResult> GetWebhook(WebhookQuery request);
+		Task<WebhookPokeQueryResult> Poke(WebhookPokeQuery query);
 		Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command);
 		Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command);
 		Task<UnarchiveCompanyResponse> UnarchiveCompany(UnarchiveCompanyCommand command);

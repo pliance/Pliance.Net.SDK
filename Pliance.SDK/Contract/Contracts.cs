@@ -81,14 +81,23 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
-	public class Company 
+	public class CompanyData 
 	{
-		public string Identity { get; set; }
+		public string Address { get; set; }
+		public string City { get; set; }
+		public string Country { get; set; }
+		public string Description { get; set; }
 		public string Name { get; set; }
+		public Owners Owners { get; set; }
+		public string ParentCompanyName { get; set; }
+		public DateTime RegistrationDate { get; set; }
+		public UltimateCompany UltimateParentCompany { get; set; }
+		public string ZipCode { get; set; }
 	}
 
 	public class CompanyFilter 
 	{
+		public bool? IsPending { get; set; }
 		public bool? IsSanction { get; set; }
 	}
 
@@ -116,15 +125,6 @@ namespace Pliance.SDK.Contract
 		public Decimal? Shares { get; set; }
 		public Decimal Stake { get; set; }
 		public Decimal? Votes { get; set; }
-	}
-
-	public class CompanyOwnership 
-	{
-		public List<CompanyOwner> CompanyOwners { get; set; }
-		public bool HasForeignUltimateParent { get; set; }
-		public Company ParentCompany { get; set; }
-		public List<PersonOwner> PersonOwners { get; set; }
-		public Company UltimateParentCompany { get; set; }
 	}
 
 	public class CompanyReportPost 
@@ -228,6 +228,7 @@ namespace Pliance.SDK.Contract
 
 	public class Filter 
 	{
+		public bool? IsPending { get; set; }
 		public bool? IsPep { get; set; }
 		public bool? IsRca { get; set; }
 		public bool? IsSanction { get; set; }
@@ -302,6 +303,7 @@ namespace Pliance.SDK.Contract
 		public string ListId { get; set; }
 		public List<ListCompanyNameViewModel> Names { get; set; }
 		public List<string> SanctionLists { get; set; }
+		public WatchlistSource WatchlistSource { get; set; }
 	}
 
 	public class ListPersonNameViewModel 
@@ -331,8 +333,11 @@ namespace Pliance.SDK.Contract
 		public List<ListPersonNameViewModel> Names { get; set; }
 		public string NationalIdentificationNumber { get; set; }
 		public List<string> Nationalities { get; set; }
+		public List<string> Notes { get; set; }
 		public List<ListRelationViewModel> Relations { get; set; }
 		public List<ListRole> Roles { get; set; }
+		public List<string> Sources { get; set; }
+		public WatchlistSource WatchlistSource { get; set; }
 	}
 
 	public class ListRelationViewModel 
@@ -364,6 +369,12 @@ namespace Pliance.SDK.Contract
 		Any = 0,
 		Strict = 1,
 		Exact = 2,
+	}
+
+	public class Owners 
+	{
+		public List<CompanyOwner> Companies { get; set; }
+		public List<PersonOwner> Persons { get; set; }
 	}
 
 	public class Page 
@@ -535,6 +546,13 @@ namespace Pliance.SDK.Contract
 		public string Text { get; set; }
 	}
 
+	public class UltimateCompany 
+	{
+		public string Identity { get; set; }
+		public bool IsForeign { get; set; }
+		public string Name { get; set; }
+	}
+
 	public class UnarchiveCompanyCommand 
 	{
 		public string CompanyReferenceId { get; set; }
@@ -553,12 +571,12 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
-	public class ViewCompanyOwnershipQuery 
+	public class ViewCompanyDataQuery 
 	{
 		public string Identity { get; set; }
 	}
 
-	public class ViewCompanyOwnershipQueryResult : ResponseGeneric<CompanyOwnership> 
+	public class ViewCompanyDataQueryResult : ResponseGeneric<CompanyData> 
 	{
 	}
 
@@ -667,6 +685,32 @@ namespace Pliance.SDK.Contract
 	{
 		public string MatchId { get; set; }
 		public string PersonReferenceId { get; set; }
+	}
+
+	public class WatchlistSource 
+	{
+		public string Filename { get; set; }
+		public string Source { get; set; }
+		public DateTime? UpdatedAt { get; set; }
+	}
+
+	public class WebhookPokeQuery 
+	{
+		public WebhookPokeType Type { get; set; }
+	}
+
+	public class WebhookPokeQueryResult : Response 
+	{
+		public string RemoteBody { get; set; }
+		public int RemoteStatusCode { get; set; }
+	}
+
+	public enum WebhookPokeType
+	{
+		PersonSanctionMatched = 0,
+		PersonSanctionMatchRemoved = 1,
+		CompanySanctionMatched = 2,
+		CompanySanctionMatchRemoved = 3,
 	}
 
 	public class WebhookQuery 

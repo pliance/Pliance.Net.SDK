@@ -66,6 +66,16 @@ namespace Pliance.SDK
 			return await ExecutePost<ClassifyPersonHitResponse>("api/PersonCommand/Classify", command);
 		}
 
+		public async Task<ViewCompanyDataQueryResult> CompanyData(ViewCompanyDataQuery request)
+		{
+			if (request is null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
+			return await ExecuteGet<ViewCompanyDataQueryResult>("api/CompanyQuery/CompanyData" + request.UrlEncoded());
+		}
+
 		public async Task<DeleteCompanyResponse> DeleteCompany(DeleteCompanyCommand command)
 		{
 			if (command is null)
@@ -136,16 +146,6 @@ namespace Pliance.SDK
 			return await ExecuteGet<WebhookQueryResult>("api/WebhookQuery" + request.UrlEncoded());
 		}
 
-		public async Task<ViewCompanyOwnershipQueryResult> Ownership(ViewCompanyOwnershipQuery request)
-		{
-			if (request is null)
-			{
-				throw new ArgumentNullException(nameof(request));
-			}
-
-			return await ExecuteGet<ViewCompanyOwnershipQueryResult>("api/CompanyQuery/Ownership" + request.UrlEncoded());
-		}
-
 		public async Task<PingResponse> Ping(PingQuery request)
 		{
 			if (request is null)
@@ -154,6 +154,16 @@ namespace Pliance.SDK
 			}
 
 			return await ExecuteGet<PingResponse>("api/Ping" + request.UrlEncoded());
+		}
+
+		public async Task<WebhookPokeQueryResult> Poke(WebhookPokeQuery query)
+		{
+			if (query is null)
+			{
+				throw new ArgumentNullException(nameof(query));
+			}
+
+			return await ExecutePost<WebhookPokeQueryResult>("api/WebhookQuery/Poke", query);
 		}
 
 		public async Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command)
