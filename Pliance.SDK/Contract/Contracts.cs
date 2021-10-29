@@ -97,7 +97,7 @@ namespace Pliance.SDK.Contract
 
 	public class CompanyFilter 
 	{
-		public bool? IsPending { get; set; }
+		public bool? IsUnclassified { get; set; }
 		public bool? IsSanction { get; set; }
 	}
 
@@ -228,7 +228,7 @@ namespace Pliance.SDK.Contract
 
 	public class Filter 
 	{
-		public bool? IsPending { get; set; }
+		public bool? IsUnclassified { get; set; }
 		public bool? IsPep { get; set; }
 		public bool? IsRca { get; set; }
 		public bool? IsSanction { get; set; }
