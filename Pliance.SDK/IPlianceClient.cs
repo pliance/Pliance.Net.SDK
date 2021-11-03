@@ -8,7 +8,6 @@ namespace Pliance.SDK
         // @inject: interface
 		Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery request);
 		Task<ViewCompanyQueryResult> ViewCompany(ViewCompanyQuery request);
-		Task<ViewCompanyDataQueryResult> CompanyData(ViewCompanyDataQuery request);
 		Task<FeedQueryResult> Feed(FeedQuery request);
 		Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery request);
 		Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery request);

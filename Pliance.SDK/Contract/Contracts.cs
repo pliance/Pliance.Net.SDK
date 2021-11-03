@@ -81,23 +81,8 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
-	public class CompanyData 
-	{
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string Country { get; set; }
-		public string Description { get; set; }
-		public string Name { get; set; }
-		public Owners Owners { get; set; }
-		public string ParentCompanyName { get; set; }
-		public DateTime RegistrationDate { get; set; }
-		public UltimateCompany UltimateParentCompany { get; set; }
-		public string ZipCode { get; set; }
-	}
-
 	public class CompanyFilter 
 	{
-		public bool? IsUnclassified { get; set; }
 		public bool? IsSanction { get; set; }
 	}
 
@@ -116,15 +101,6 @@ namespace Pliance.SDK.Contract
 	{
 		public string Country { get; set; }
 		public string Identity { get; set; }
-	}
-
-	public class CompanyOwner 
-	{
-		public string Name { get; set; }
-		public string OrganizationNumber { get; set; }
-		public Decimal? Shares { get; set; }
-		public Decimal Stake { get; set; }
-		public Decimal? Votes { get; set; }
 	}
 
 	public class CompanyReportPost 
@@ -228,7 +204,6 @@ namespace Pliance.SDK.Contract
 
 	public class Filter 
 	{
-		public bool? IsUnclassified { get; set; }
 		public bool? IsPep { get; set; }
 		public bool? IsRca { get; set; }
 		public bool? IsSanction { get; set; }
@@ -371,12 +346,6 @@ namespace Pliance.SDK.Contract
 		Exact = 2,
 	}
 
-	public class Owners 
-	{
-		public List<CompanyOwner> Companies { get; set; }
-		public List<PersonOwner> Persons { get; set; }
-	}
-
 	public class Page 
 	{
 		public int No { get; set; }
@@ -404,16 +373,6 @@ namespace Pliance.SDK.Contract
 	{
 		public string Country { get; set; }
 		public string Identity { get; set; }
-	}
-
-	public class PersonOwner 
-	{
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
-		public string NationalIdentityNumber { get; set; }
-		public Decimal? Shares { get; set; }
-		public Decimal Stake { get; set; }
-		public Decimal? Votes { get; set; }
 	}
 
 	public class PersonReportPost 
@@ -546,13 +505,6 @@ namespace Pliance.SDK.Contract
 		public string Text { get; set; }
 	}
 
-	public class UltimateCompany 
-	{
-		public string Identity { get; set; }
-		public bool IsForeign { get; set; }
-		public string Name { get; set; }
-	}
-
 	public class UnarchiveCompanyCommand 
 	{
 		public string CompanyReferenceId { get; set; }
@@ -568,15 +520,6 @@ namespace Pliance.SDK.Contract
 	}
 
 	public class UnarchivePersonResponse : Response 
-	{
-	}
-
-	public class ViewCompanyDataQuery 
-	{
-		public string Identity { get; set; }
-	}
-
-	public class ViewCompanyDataQueryResult : ResponseGeneric<CompanyData> 
 	{
 	}
 

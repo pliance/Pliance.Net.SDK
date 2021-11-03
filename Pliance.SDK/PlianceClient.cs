@@ -66,16 +66,6 @@ namespace Pliance.SDK
 			return await ExecutePost<ClassifyPersonHitResponse>("api/PersonCommand/Classify", command);
 		}
 
-		public async Task<ViewCompanyDataQueryResult> CompanyData(ViewCompanyDataQuery request)
-		{
-			if (request is null)
-			{
-				throw new ArgumentNullException(nameof(request));
-			}
-
-			return await ExecuteGet<ViewCompanyDataQueryResult>("api/CompanyQuery/CompanyData" + request.UrlEncoded());
-		}
-
 		public async Task<DeleteCompanyResponse> DeleteCompany(DeleteCompanyCommand command)
 		{
 			if (command is null)
