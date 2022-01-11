@@ -50,6 +50,17 @@ namespace Pliance.SDK.Contract
 		public int? Year { get; set; }
 	}
 
+	public class BoardMember 
+	{
+		public string City { get; set; }
+		public string CountryOfResidence { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string NationalIdentityNumber { get; set; }
+		public Role Role { get; set; }
+		public string ZipCode { get; set; }
+	}
+
 	public enum ClassificationType
 	{
 		Unknown = 0,
@@ -81,9 +92,32 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
+	public class Company 
+	{
+		public string Identity { get; set; }
+		public string Name { get; set; }
+	}
+
+	public class CompanyData 
+	{
+		public string Address { get; set; }
+		public List<BoardMember> Boardmembers { get; set; }
+		public string City { get; set; }
+		public string Country { get; set; }
+		public string Description { get; set; }
+		public string Name { get; set; }
+		public Owners Owners { get; set; }
+		public Company ParentCompany { get; set; }
+		public DateTime RegistrationDate { get; set; }
+		public string Signatory { get; set; }
+		public UltimateCompany UltimateParentCompany { get; set; }
+		public string ZipCode { get; set; }
+	}
+
 	public class CompanyFilter 
 	{
 		public bool? IsSanction { get; set; }
+		public bool? IsUnclassified { get; set; }
 	}
 
 	public class CompanyHit 
@@ -101,6 +135,15 @@ namespace Pliance.SDK.Contract
 	{
 		public string Country { get; set; }
 		public string Identity { get; set; }
+	}
+
+	public class CompanyOwner 
+	{
+		public string Name { get; set; }
+		public string OrganizationNumber { get; set; }
+		public Decimal? Shares { get; set; }
+		public Decimal Stake { get; set; }
+		public Decimal? Votes { get; set; }
 	}
 
 	public class CompanyReportPost 
@@ -200,14 +243,6 @@ namespace Pliance.SDK.Contract
 	public class FeedQueryResultData 
 	{
 		public List<FeedQueryItem> Items { get; set; }
-	}
-
-	public class Filter 
-	{
-		public bool? IsPep { get; set; }
-		public bool? IsRca { get; set; }
-		public bool? IsSanction { get; set; }
-		public bool? IsSip { get; set; }
 	}
 
 	public enum Fuzziness
@@ -346,6 +381,12 @@ namespace Pliance.SDK.Contract
 		Exact = 2,
 	}
 
+	public class Owners 
+	{
+		public List<CompanyOwner> Companies { get; set; }
+		public List<PersonOwner> Persons { get; set; }
+	}
+
 	public class Page 
 	{
 		public int No { get; set; }
@@ -369,10 +410,29 @@ namespace Pliance.SDK.Contract
 		public Decimal Score { get; set; }
 	}
 
+	public class PersonFilter 
+	{
+		public bool? IsPep { get; set; }
+		public bool? IsRca { get; set; }
+		public bool? IsSanction { get; set; }
+		public bool? IsSip { get; set; }
+		public bool? IsUnclassified { get; set; }
+	}
+
 	public class PersonIdentity 
 	{
 		public string Country { get; set; }
 		public string Identity { get; set; }
+	}
+
+	public class PersonOwner 
+	{
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string NationalIdentityNumber { get; set; }
+		public Decimal? Shares { get; set; }
+		public Decimal Stake { get; set; }
+		public Decimal? Votes { get; set; }
 	}
 
 	public class PersonReportPost 
@@ -403,7 +463,7 @@ namespace Pliance.SDK.Contract
 
 	public class PersonSearchQuery 
 	{
-		public Filter Filter { get; set; }
+		public PersonFilter Filter { get; set; }
 		public Page Page { get; set; }
 		public string Query { get; set; }
 	}
@@ -499,10 +559,26 @@ namespace Pliance.SDK.Contract
 		Error = -1,
 	}
 
+	public enum Role
+	{
+		Chairman = 0,
+		Ceo = 1,
+		BoardMember = 2,
+		Accountant = 3,
+		AlternateMember = 4,
+	}
+
 	public class TextMatch 
 	{
 		public bool IsMatch { get; set; }
 		public string Text { get; set; }
+	}
+
+	public class UltimateCompany 
+	{
+		public string Identity { get; set; }
+		public bool IsForeign { get; set; }
+		public string Name { get; set; }
 	}
 
 	public class UnarchiveCompanyCommand 
@@ -520,6 +596,15 @@ namespace Pliance.SDK.Contract
 	}
 
 	public class UnarchivePersonResponse : Response 
+	{
+	}
+
+	public class ViewCompanyDataQuery 
+	{
+		public string CompanyReferenceId { get; set; }
+	}
+
+	public class ViewCompanyDataQueryResult : ResponseGeneric<CompanyData> 
 	{
 	}
 
