@@ -9,9 +9,11 @@ namespace Pliance.SDK
 		Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery request);
 		Task<ViewCompanyQueryResult> ViewCompany(ViewCompanyQuery request);
 		Task<ViewCompanyDataQueryResult> CompanyData(ViewCompanyDataQuery request);
+		Task<ListCompanyQueryResult> ListCompanies(ListCompanyQuery request);
 		Task<FeedQueryResult> Feed(FeedQuery request);
 		Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery request);
 		Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery request);
+		Task<ListPersonQueryResult> ListPersons(ListPersonQuery request);
 		Task<PingResponse> Ping(PingQuery request);
 		Task<PersonReportQueryResult> GetPersonReport(PersonReportQuery request);
 		Task<GeneralReportQueryResult> GetGeneralReport(GeneralReportQuery request);

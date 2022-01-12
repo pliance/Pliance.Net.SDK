@@ -300,11 +300,25 @@ namespace Pliance.SDK.Contract
 		public int? Year { get; set; }
 	}
 
+	public class ListCompaniesModel 
+	{
+		public LastChanged Changed { get; set; }
+		public List<string> Companies { get; set; }
+	}
+
 	public class ListCompanyNameViewModel 
 	{
 		public string Name { get; set; }
 		public List<TextMatch> SelectedName { get; set; }
 		public string Type { get; set; }
+	}
+
+	public class ListCompanyQuery 
+	{
+	}
+
+	public class ListCompanyQueryResult : ResponseGeneric<ListCompaniesModel> 
+	{
 	}
 
 	public class ListCompanyViewModel 
@@ -323,6 +337,14 @@ namespace Pliance.SDK.Contract
 		public List<TextMatch> SelectedFirstName { get; set; }
 		public List<TextMatch> SelectedLastName { get; set; }
 		public string Type { get; set; }
+	}
+
+	public class ListPersonQuery 
+	{
+	}
+
+	public class ListPersonQueryResult : ResponseGeneric<ListPersonsModel> 
+	{
 	}
 
 	public class ListPersonViewModel 
@@ -348,6 +370,12 @@ namespace Pliance.SDK.Contract
 		public List<ListRole> Roles { get; set; }
 		public List<string> Sources { get; set; }
 		public WatchlistSource WatchlistSource { get; set; }
+	}
+
+	public class ListPersonsModel 
+	{
+		public LastChanged Changed { get; set; }
+		public List<string> Persons { get; set; }
 	}
 
 	public class ListRelationViewModel 
