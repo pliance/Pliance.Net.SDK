@@ -60,6 +60,8 @@ namespace Pliance.SDK
             try
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", CreateJwtToken(givenName, subject));
+                client.DefaultRequestHeaders.UserAgent.Clear();
+                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("Pliance.Net.SDK", "VERSION"));
                 
                 return await action(client);
             }
