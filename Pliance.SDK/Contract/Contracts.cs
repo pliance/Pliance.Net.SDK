@@ -105,6 +105,7 @@ namespace Pliance.SDK.Contract
 		public string City { get; set; }
 		public string Country { get; set; }
 		public string Description { get; set; }
+		public LegalForm LegalForm { get; set; }
 		public string Name { get; set; }
 		public Owners Owners { get; set; }
 		public Company ParentCompany { get; set; }
@@ -277,6 +278,30 @@ namespace Pliance.SDK.Contract
 	{
 		public string Checkpoint { get; set; }
 		public DateTime TimestampUtc { get; set; }
+	}
+
+	public class LegalForm 
+	{
+		public string Description { get; set; }
+		public LegalFormType Type { get; set; }
+	}
+
+	public enum LegalFormType
+	{
+		LimitedCompany = 1,
+		PrivateBusinessGovControlled = 2,
+		ForeignCompany = 3,
+		Bank = 4,
+		SoleProprietorship = 5,
+		GeneralPartnership = 6,
+		Society = 7,
+		Foundation = 8,
+		HousingCompany = 9,
+		StateOrCountyCompany = 10,
+		ReligiousOrganisation = 11,
+		InsuranceCompany = 12,
+		Collaborations = 13,
+		Other = 20,
 	}
 
 	public class ListAddress 
