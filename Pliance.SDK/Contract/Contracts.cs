@@ -283,25 +283,7 @@ namespace Pliance.SDK.Contract
 	public class LegalForm 
 	{
 		public string Description { get; set; }
-		public LegalFormType Type { get; set; }
-	}
-
-	public enum LegalFormType
-	{
-		LimitedCompany = 1,
-		PrivateBusinessGovControlled = 2,
-		ForeignCompany = 3,
-		Bank = 4,
-		SoleProprietorship = 5,
-		GeneralPartnership = 6,
-		Society = 7,
-		Foundation = 8,
-		HousingCompany = 9,
-		StateOrCountyCompany = 10,
-		ReligiousOrganisation = 11,
-		InsuranceCompany = 12,
-		Collaborations = 13,
-		Other = 20,
+		public int Type { get; set; }
 	}
 
 	public class ListAddress 
@@ -325,9 +307,8 @@ namespace Pliance.SDK.Contract
 		public int? Year { get; set; }
 	}
 
-	public class ListCompaniesModel 
+	public class ListCompanyCompanies 
 	{
-		public LastChanged Changed { get; set; }
 		public List<string> Companies { get; set; }
 	}
 
@@ -340,9 +321,10 @@ namespace Pliance.SDK.Contract
 
 	public class ListCompanyQuery 
 	{
+		public Page Page { get; set; }
 	}
 
-	public class ListCompanyQueryResult : ResponseGeneric<ListCompaniesModel> 
+	public class ListCompanyQueryResult : ResponseGeneric<ListCompanyCompanies> 
 	{
 	}
 
@@ -364,11 +346,17 @@ namespace Pliance.SDK.Contract
 		public string Type { get; set; }
 	}
 
-	public class ListPersonQuery 
+	public class ListPersonPersons 
 	{
+		public List<string> Persons { get; set; }
 	}
 
-	public class ListPersonQueryResult : ResponseGeneric<ListPersonsModel> 
+	public class ListPersonQuery 
+	{
+		public Page Page { get; set; }
+	}
+
+	public class ListPersonQueryResult : ResponseGeneric<ListPersonPersons> 
 	{
 	}
 
@@ -395,12 +383,6 @@ namespace Pliance.SDK.Contract
 		public List<ListRole> Roles { get; set; }
 		public List<string> Sources { get; set; }
 		public WatchlistSource WatchlistSource { get; set; }
-	}
-
-	public class ListPersonsModel 
-	{
-		public LastChanged Changed { get; set; }
-		public List<string> Persons { get; set; }
 	}
 
 	public class ListRelationViewModel 
