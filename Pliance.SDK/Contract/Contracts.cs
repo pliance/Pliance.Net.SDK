@@ -53,11 +53,14 @@ namespace Pliance.SDK.Contract
 	public class BoardMember 
 	{
 		public string City { get; set; }
+		public string CompanyIdentityNumber { get; set; }
 		public string CountryOfResidence { get; set; }
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
+		public string Name { get; set; }
 		public string NationalIdentityNumber { get; set; }
 		public Role Role { get; set; }
+		public string Street { get; set; }
 		public string ZipCode { get; set; }
 	}
 
@@ -599,8 +602,10 @@ namespace Pliance.SDK.Contract
 		Chairman = 0,
 		Ceo = 1,
 		BoardMember = 2,
-		Accountant = 3,
+		LeadAccountant = 3,
 		AlternateMember = 4,
+		ExternalSignatory = 5,
+		Accountant = 6,
 	}
 
 	public class TextMatch 
@@ -678,15 +683,12 @@ namespace Pliance.SDK.Contract
 		public bool Archived { get; set; }
 		public List<ViewCompanyPersonResponse> Beneficiaries { get; set; }
 		public string CompanyReferenceId { get; set; }
-		public string CorporateForm { get; set; }
-		public string Description { get; set; }
 		public bool HighRiskCountry { get; set; }
 		public List<List<CompanyHit>> Hits { get; set; }
 		public CompanyIdentity Identity { get; set; }
 		public bool IsSanction { get; set; }
 		public LastChanged LastChanged { get; set; }
 		public string Name { get; set; }
-		public DateTime? RegistrationDate { get; set; }
 		public List<ViewPersonResponseData> Representatives { get; set; }
 	}
 
