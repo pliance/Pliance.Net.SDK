@@ -166,6 +166,16 @@ namespace Pliance.SDK
 			return await ExecuteGet<ListPersonQueryResult>("api/PersonQuery/List" + request.UrlEncoded());
 		}
 
+		public async Task<WebhookDeliveryFailuresQueryResult> ListWebhookDeliveryFailures(WebhookDeliveryFailuresQuery query)
+		{
+			if (query is null)
+			{
+				throw new ArgumentNullException(nameof(query));
+			}
+
+			return await ExecuteGet<WebhookDeliveryFailuresQueryResult>("api/WebhookQuery/DeliveryFailures" + query.UrlEncoded());
+		}
+
 		public async Task<PingResponse> Ping(PingQuery request)
 		{
 			if (request is null)
