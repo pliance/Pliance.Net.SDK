@@ -762,6 +762,7 @@ namespace Pliance.SDK.Contract
 	public class WebhookDeliveryFailure 
 	{
 		public string Id { get; set; }
+		public string Reason { get; set; }
 		public string ReferenceId { get; set; }
 		public DateTime Timestamp { get; set; }
 		public string Type { get; set; }
