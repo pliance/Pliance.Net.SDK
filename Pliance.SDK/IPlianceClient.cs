@@ -23,6 +23,7 @@ namespace Pliance.SDK
 		Task<WatchlistCompanyQueryResult> WatchlistCompany(WatchlistCompanyQuery request);
 		Task<WebhookQueryResult> GetWebhook(WebhookQuery request);
 		Task<WebhookPokeQueryResult> Poke(WebhookPokeQuery query);
+		Task<WebhookDeliveryFailuresQueryResult> ListWebhookDeliveryFailures(WebhookDeliveryFailuresQuery query);
 		Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command);
 		Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command);
 		Task<UnarchiveCompanyResponse> UnarchiveCompany(UnarchiveCompanyCommand command);
