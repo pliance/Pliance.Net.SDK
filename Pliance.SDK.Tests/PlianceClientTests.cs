@@ -175,13 +175,13 @@ namespace Pliance.SDK.Tests
             Assert.True(response.Success);
         }           
         
-        [Fact]
-        public async Task TestFeed()
-        {
-            var response = await _client.Feed(new FeedQuery());
+        //[Fact]
+        //public async Task TestFeed()
+        //{
+        //    var response = await _client.Feed(new FeedQuery());
             
-            Assert.True(response.Success);
-        }         
+        //    Assert.True(response.Success);
+        //}         
         
         [Fact]
         public async Task TestSaveWebhook()

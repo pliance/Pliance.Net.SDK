@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace Pliance.SDK.Contract
 {
-    // @inject: contracts
-	public enum ActivityType
+    // @inject: contracts	public enum ActivityType
 	{
 		Matched = 0,
 	}
@@ -109,6 +108,8 @@ namespace Pliance.SDK.Contract
 		public string Country { get; set; }
 		public string Description { get; set; }
 		public LegalForm LegalForm { get; set; }
+		public LegalFormType LegalFormType { get; set; }
+		public ListingType ListingType { get; set; }
 		public string Name { get; set; }
 		public Owners Owners { get; set; }
 		public Company ParentCompany { get; set; }
@@ -121,6 +122,7 @@ namespace Pliance.SDK.Contract
 	public class CompanyFilter 
 	{
 		public bool? IsSanction { get; set; }
+		public bool? IsSie { get; set; }
 		public bool? IsUnclassified { get; set; }
 	}
 
@@ -200,6 +202,7 @@ namespace Pliance.SDK.Contract
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
+		public bool IsSie { get; set; }
 		public List<TextMatch> Name { get; set; }
 	}
 
@@ -219,28 +222,6 @@ namespace Pliance.SDK.Contract
 
 	public class DeletePersonResponse : Response 
 	{
-	}
-
-	public class FeedQuery 
-	{
-		public string From { get; set; }
-	}
-
-	public class FeedQueryItem 
-	{
-		public object Body { get; set; }
-		public string Checkpoint { get; set; }
-		public object Metadata { get; set; }
-		public string Type { get; set; }
-	}
-
-	public class FeedQueryResult : ResponseGeneric<FeedQueryResultData> 
-	{
-	}
-
-	public class FeedQueryResultData 
-	{
-		public List<FeedQueryItem> Items { get; set; }
 	}
 
 	public enum Fuzziness
@@ -281,6 +262,52 @@ namespace Pliance.SDK.Contract
 	{
 		public string Description { get; set; }
 		public int Type { get; set; }
+	}
+
+	public enum LegalFormType
+	{
+		LimitedCompany = 0,
+		PrivateBusinessGovControlled = 1,
+		ForeignCompany = 2,
+		Bank = 3,
+		SoleProprietorship = 4,
+		GeneralPartnership = 5,
+		Society = 6,
+		Foundation = 7,
+		HousingCompany = 8,
+		StateOrCountyCompany = 9,
+		ReligiousOrganisation = 10,
+		InsuranceCompany = 11,
+		Collaborations = 12,
+		Other = 13,
+	}
+
+	public class LinkDescriptionModel 
+	{
+		public Role? Role { get; set; }
+		public LinkType Type { get; set; }
+	}
+
+	public class LinkModel 
+	{
+		public Birthdate BirthDate { get; set; }
+		public string FirstName { get; set; }
+		public Gender Gender { get; set; }
+		public string Id { get; set; }
+		public string LastName { get; set; }
+		public List<LinkDescriptionModel> LinkDescriptions { get; set; }
+		public List<PersonDetailsHitModel> Matches { get; set; }
+		public string Name { get; set; }
+		public string OrganizationIdentityNumber { get; set; }
+		public string PersonIdentityNumber { get; set; }
+	}
+
+	public enum LinkType
+	{
+		Owner = 0,
+		BoardMember = 1,
+		UltimateBeneficialOwner = 2,
+		AlternateBeneficialOwner = 3,
 	}
 
 	public class ListAddress 
@@ -333,6 +360,12 @@ namespace Pliance.SDK.Contract
 		public List<ListCompanyNameViewModel> Names { get; set; }
 		public List<string> SanctionLists { get; set; }
 		public WatchlistSource WatchlistSource { get; set; }
+	}
+
+	public enum ListingType
+	{
+		Listed = 0,
+		Unlisted = 1,
 	}
 
 	public class ListPersonNameViewModel 
@@ -551,6 +584,18 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
+	public class RegisterCompanyV2Command 
+	{
+		public string CompanyReferenceId { get; set; }
+		public CompanyIdentity Identity { get; set; }
+		public string Name { get; set; }
+		public RegisterCompanyOptions Options { get; set; }
+	}
+
+	public class RegisterCompanyV2Response : ResponseGeneric<ViewCompanyV2ResponseData> 
+	{
+	}
+
 	public class RegisterPersonCommand 
 	{
 		public List<Address> Addresses { get; set; }
@@ -680,8 +725,30 @@ namespace Pliance.SDK.Contract
 		public List<List<CompanyHit>> Hits { get; set; }
 		public CompanyIdentity Identity { get; set; }
 		public bool IsSanction { get; set; }
+		public bool IsSie { get; set; }
 		public LastChanged LastChanged { get; set; }
 		public string Name { get; set; }
+	}
+
+	public class ViewCompanyV2Response : ResponseGeneric<ViewCompanyV2ResponseData> 
+	{
+	}
+
+	public class ViewCompanyV2ResponseData 
+	{
+		public bool Archived { get; set; }
+		public string CompanyReferenceId { get; set; }
+		public string Description { get; set; }
+		public bool HighRiskCountry { get; set; }
+		public List<List<CompanyHit>> Hits { get; set; }
+		public CompanyIdentity Identity { get; set; }
+		public bool IsSanction { get; set; }
+		public bool IsSie { get; set; }
+		public LastChanged LastChanged { get; set; }
+		public LegalFormType? LegalForm { get; set; }
+		public List<LinkModel> Links { get; set; }
+		public string Name { get; set; }
+		public string Signatory { get; set; }
 	}
 
 	public class ViewPersonQuery 

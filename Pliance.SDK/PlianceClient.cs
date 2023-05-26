@@ -25,8 +25,7 @@ namespace Pliance.SDK
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
 
-        // @inject: methods
-		public async Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command)
+        // @inject: methods		public async Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command)
 		{
 			if (command is null)
 			{
@@ -34,6 +33,16 @@ namespace Pliance.SDK
 			}
 
 			return await ExecutePost<ArchiveCompanyResponse>("api/CompanyCommand/Archive", command);
+		}
+
+		public async Task<ArchiveCompanyResponse> ArchiveCompanyV2(ArchiveCompanyCommand command)
+		{
+			if (command is null)
+			{
+				throw new ArgumentNullException(nameof(command));
+			}
+
+			return await ExecutePost<ArchiveCompanyResponse>("api/CompanyV2Command/Archive", command);
 		}
 
 		public async Task<ArchivePersonResponse> ArchivePerson(ArchivePersonCommand command)
@@ -86,6 +95,16 @@ namespace Pliance.SDK
 			return await ExecuteDelete<DeleteCompanyResponse>("api/CompanyCommand" + command.UrlEncoded());
 		}
 
+		public async Task<DeleteCompanyResponse> DeleteCompanyV2(DeleteCompanyCommand command)
+		{
+			if (command is null)
+			{
+				throw new ArgumentNullException(nameof(command));
+			}
+
+			return await ExecuteDelete<DeleteCompanyResponse>("api/CompanyV2Command" + command.UrlEncoded());
+		}
+
 		public async Task<DeletePersonResponse> DeletePerson(DeletePersonCommand command)
 		{
 			if (command is null)
@@ -94,16 +113,6 @@ namespace Pliance.SDK
 			}
 
 			return await ExecuteDelete<DeletePersonResponse>("api/PersonCommand" + command.UrlEncoded());
-		}
-
-		public async Task<FeedQueryResult> Feed(FeedQuery request)
-		{
-			if (request is null)
-			{
-				throw new ArgumentNullException(nameof(request));
-			}
-
-			return await ExecuteGet<FeedQueryResult>("api/FeedQuery" + request.UrlEncoded());
 		}
 
 		public async Task<CompanyReportQueryResult> GetCompanyReport(CompanyReportQuery request)
@@ -206,6 +215,16 @@ namespace Pliance.SDK
 			return await ExecutePut<RegisterCompanyResponse>("api/CompanyCommand", command);
 		}
 
+		public async Task<RegisterCompanyV2Response> RegisterCompanyV2(RegisterCompanyV2Command command)
+		{
+			if (command is null)
+			{
+				throw new ArgumentNullException(nameof(command));
+			}
+
+			return await ExecutePut<RegisterCompanyV2Response>("api/CompanyV2Command", command);
+		}
+
 		public async Task<RegisterPersonResponse> RegisterPerson(RegisterPersonCommand command)
 		{
 			if (command is null)
@@ -256,6 +275,16 @@ namespace Pliance.SDK
 			return await ExecutePost<UnarchiveCompanyResponse>("api/CompanyCommand/Unarchive", command);
 		}
 
+		public async Task<UnarchiveCompanyResponse> UnarchiveCompanyV2(UnarchiveCompanyCommand command)
+		{
+			if (command is null)
+			{
+				throw new ArgumentNullException(nameof(command));
+			}
+
+			return await ExecutePost<UnarchiveCompanyResponse>("api/CompanyV2Command/Unarchive", command);
+		}
+
 		public async Task<UnarchivePersonResponse> UnarchivePerson(UnarchivePersonCommand command)
 		{
 			if (command is null)
@@ -274,6 +303,16 @@ namespace Pliance.SDK
 			}
 
 			return await ExecuteGet<ViewCompanyQueryResult>("api/CompanyQuery" + request.UrlEncoded());
+		}
+
+		public async Task<ViewCompanyV2Response> ViewCompanyV2(ViewCompanyQuery query)
+		{
+			if (query is null)
+			{
+				throw new ArgumentNullException(nameof(query));
+			}
+
+			return await ExecuteGet<ViewCompanyV2Response>("api/CompanyV2Query" + query.UrlEncoded());
 		}
 
 		public async Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery request)

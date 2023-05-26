@@ -5,12 +5,10 @@ namespace Pliance.SDK
 {
     public interface IPlianceClient
     {
-        // @inject: interface
-		Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery request);
+        // @inject: interface		Task<CompanySearchQueryResult> SearchCompany(CompanySearchQuery request);
 		Task<ViewCompanyQueryResult> ViewCompany(ViewCompanyQuery request);
 		Task<ViewCompanyDataQueryResult> CompanyData(ViewCompanyDataQuery request);
 		Task<ListCompanyQueryResult> ListCompanies(ListCompanyQuery request);
-		Task<FeedQueryResult> Feed(FeedQuery request);
 		Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery request);
 		Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery request);
 		Task<ListPersonQueryResult> ListPersons(ListPersonQuery request);
@@ -24,6 +22,11 @@ namespace Pliance.SDK
 		Task<WebhookQueryResult> GetWebhook(WebhookQuery request);
 		Task<WebhookPokeQueryResult> Poke(WebhookPokeQuery query);
 		Task<WebhookDeliveryFailuresQueryResult> ListWebhookDeliveryFailures(WebhookDeliveryFailuresQuery query);
+		Task<RegisterCompanyV2Response> RegisterCompanyV2(RegisterCompanyV2Command command);
+		Task<ArchiveCompanyResponse> ArchiveCompanyV2(ArchiveCompanyCommand command);
+		Task<UnarchiveCompanyResponse> UnarchiveCompanyV2(UnarchiveCompanyCommand command);
+		Task<DeleteCompanyResponse> DeleteCompanyV2(DeleteCompanyCommand command);
+		Task<ViewCompanyV2Response> ViewCompanyV2(ViewCompanyQuery query);
 		Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command);
 		Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command);
 		Task<UnarchiveCompanyResponse> UnarchiveCompany(UnarchiveCompanyCommand command);
