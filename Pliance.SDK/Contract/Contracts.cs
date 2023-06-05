@@ -647,6 +647,12 @@ namespace Pliance.SDK.Contract
 		ExternalCeo = 7,
 	}
 
+	public class Sni 
+	{
+		public string Classification { get; set; }
+		public string ClassificationCode { get; set; }
+	}
+
 	public class TextMatch 
 	{
 		public bool IsMatch { get; set; }
@@ -736,7 +742,9 @@ namespace Pliance.SDK.Contract
 
 	public class ViewCompanyV2ResponseData 
 	{
+		public string Address { get; set; }
 		public bool Archived { get; set; }
+		public string City { get; set; }
 		public string CompanyReferenceId { get; set; }
 		public string Description { get; set; }
 		public bool HighRiskCountry { get; set; }
@@ -749,6 +757,8 @@ namespace Pliance.SDK.Contract
 		public List<LinkModel> Links { get; set; }
 		public string Name { get; set; }
 		public string Signatory { get; set; }
+		public Sni Sni { get; set; }
+		public string Zipcode { get; set; }
 	}
 
 	public class ViewPersonQuery 
