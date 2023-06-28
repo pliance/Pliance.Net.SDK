@@ -65,6 +65,26 @@ namespace Pliance.SDK
 			return await ExecutePost<ClassifyCompanyHitResponse>("api/CompanyCommand/Classify", command);
 		}
 
+		public async Task<ClassifyCompanyLinkResponse> ClassifyCompanyV2Link(ClassifyCompanyLinkCommand command)
+		{
+			if (command is null)
+			{
+				throw new ArgumentNullException(nameof(command));
+			}
+
+			return await ExecutePost<ClassifyCompanyLinkResponse>("api/CompanyV2Command/ClassifyLink", command);
+		}
+
+		public async Task<ClassifyCompanyResponse> ClassifyCompanyV2Match(ClassifyCompanyCommand command)
+		{
+			if (command is null)
+			{
+				throw new ArgumentNullException(nameof(command));
+			}
+
+			return await ExecutePost<ClassifyCompanyResponse>("api/CompanyV2Command/Classify", command);
+		}
+
 		public async Task<ClassifyPersonHitResponse> ClassifyPersonHit(ClassifyPersonHitCommand command)
 		{
 			if (command is null)

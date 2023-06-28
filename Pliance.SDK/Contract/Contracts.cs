@@ -70,6 +70,14 @@ namespace Pliance.SDK.Contract
 		Match = 2,
 	}
 
+	public class ClassifyCompanyCommand 
+	{
+		public string AliasId { get; set; }
+		public ClassificationType Classification { get; set; }
+		public string CompanyReferenceId { get; set; }
+		public string MatchId { get; set; }
+	}
+
 	public class ClassifyCompanyHitCommand 
 	{
 		public string AliasId { get; set; }
@@ -79,6 +87,23 @@ namespace Pliance.SDK.Contract
 	}
 
 	public class ClassifyCompanyHitResponse : Response 
+	{
+	}
+
+	public class ClassifyCompanyLinkCommand 
+	{
+		public string AliasId { get; set; }
+		public ClassificationType Classification { get; set; }
+		public string CompanyReferenceId { get; set; }
+		public string LinkId { get; set; }
+		public string MatchId { get; set; }
+	}
+
+	public class ClassifyCompanyLinkResponse : Response 
+	{
+	}
+
+	public class ClassifyCompanyResponse : Response 
 	{
 	}
 
@@ -284,7 +309,7 @@ namespace Pliance.SDK.Contract
 
 	public class LinkDescriptionModel 
 	{
-		public Role? Role { get; set; }
+		public List<Role> Roles { get; set; }
 		public LinkType Type { get; set; }
 	}
 
@@ -852,6 +877,7 @@ namespace Pliance.SDK.Contract
 
 	public class WebhookPokeQuery 
 	{
+		public string ReferenceId { get; set; }
 		public WebhookPokeType Type { get; set; }
 	}
 
@@ -867,6 +893,19 @@ namespace Pliance.SDK.Contract
 		PersonSanctionMatchRemoved = 1,
 		CompanySanctionMatched = 2,
 		CompanySanctionMatchRemoved = 3,
+		CompanyNameChanged = 4,
+		CompanyDescriptionChanged = 5,
+		CompanySignatoryChanged = 6,
+		CompanyLinkAdded = 7,
+		CompanyLinkRemoved = 8,
+		CompanyLinkUpdated = 9,
+		CompanyLinkScreeningMatched = 10,
+		CompanyLinkScreeningMatchRemoved = 11,
+		CompanyLinkScreeningMatchedNameChanged = 12,
+		CompanyScreeningMatched = 13,
+		CompanyScreeningMatchRemoved = 14,
+		CompanyAddressChanged = 15,
+		CompanySniClassificationChanged = 16,
 	}
 
 	public class WebhookQuery 
