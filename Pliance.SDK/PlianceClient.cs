@@ -25,7 +25,8 @@ namespace Pliance.SDK
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
 
-        // @inject: methods		public async Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command)
+        // @inject: methods
+		public async Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command)
 		{
 			if (command is null)
 			{
@@ -456,13 +457,13 @@ namespace Pliance.SDK
 
         private async Task<T> HandleResponse<T>(HttpResponseMessage response) where T : Response
         {
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new ApiException(response.ReasonPhrase);
-            }
-
             var responseString = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<T>(responseString);
+            
+            if (!response.IsSuccessStatusCode)
+            {
+	            throw new ApiException(result.Message);
+            }            
 
             if (!result.Success)
             {
