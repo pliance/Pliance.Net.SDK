@@ -276,6 +276,16 @@ namespace Pliance.SDK
 			return await ExecuteGet<CompanySearchQueryResult>("api/CompanyQuery/Search" + request.UrlEncoded());
 		}
 
+		public async Task<SearchCompanyV2Response> SearchCompany(SearchCompanyQuery request)
+		{
+			if (request is null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
+			return await ExecuteGet<SearchCompanyV2Response>("api/CompanyV2Query/Search" + request.UrlEncoded());
+		}
+
 		public async Task<PersonSearchQueryResult> SearchPerson(PersonSearchQuery request)
 		{
 			if (request is null)
@@ -326,14 +336,14 @@ namespace Pliance.SDK
 			return await ExecuteGet<ViewCompanyQueryResult>("api/CompanyQuery" + request.UrlEncoded());
 		}
 
-		public async Task<ViewCompanyV2Response> ViewCompanyV2(ViewCompanyQuery query)
+		public async Task<ViewCompanyV2Response> ViewCompanyV2(ViewCompanyQuery request)
 		{
-			if (query is null)
+			if (request is null)
 			{
-				throw new ArgumentNullException(nameof(query));
+				throw new ArgumentNullException(nameof(request));
 			}
 
-			return await ExecuteGet<ViewCompanyV2Response>("api/CompanyV2Query" + query.UrlEncoded());
+			return await ExecuteGet<ViewCompanyV2Response>("api/CompanyV2Query" + request.UrlEncoded());
 		}
 
 		public async Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery request)
