@@ -203,20 +203,6 @@ namespace Pliance.SDK.Contract
 		public List<CompanyReportPost> Result { get; set; }
 	}
 
-	public class CompanySearchData 
-	{
-		public List<CompanySearchItem> Companies { get; set; }
-	}
-
-	public class CompanySearchItem 
-	{
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string CompanyIdentifier { get; set; }
-		public string Name { get; set; }
-		public string Zipcode { get; set; }
-	}
-
 	public class CompanySearchQuery 
 	{
 		public CompanyFilter Filter { get; set; }
@@ -684,15 +670,24 @@ namespace Pliance.SDK.Contract
 		ExternalSignatory = 5,
 		Accountant = 6,
 		ExternalCeo = 7,
-	}
-
-	public class SearchCompanyQuery 
-	{
-		public string Query { get; set; }
-	}
-
-	public class SearchCompanyV2Response : ResponseGeneric<CompanySearchData> 
-	{
+		ExternalDeputyCeo = 8,
+		SubstituteAccountant = 9,
+		NonCertifiedSubstituteAccountant = 10,
+		Liquidator = 11,
+		SubstituteLiquidator = 12,
+		Procurator = 13,
+		KeyPerson = 14,
+		PersonOfNotification = 15,
+		Owner = 16,
+		NonCertifiedAccountant = 17,
+		DeputyCeo = 18,
+		Actuary = 19,
+		SubstituteChairman = 20,
+		SubstituteCeo = 21,
+		Complimentary = 22,
+		LimitedPartnerOwner = 23,
+		Director = 24,
+		Founder = 25,
 	}
 
 	public class Sni 

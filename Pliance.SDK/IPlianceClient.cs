@@ -29,7 +29,6 @@ namespace Pliance.SDK
 		Task<ClassifyCompanyResponse> ClassifyCompanyV2Match(ClassifyCompanyCommand command);
 		Task<ClassifyCompanyLinkResponse> ClassifyCompanyV2Link(ClassifyCompanyLinkCommand command);
 		Task<ViewCompanyV2Response> ViewCompanyV2(ViewCompanyQuery request);
-		Task<SearchCompanyV2Response> SearchCompany(SearchCompanyQuery request);
 		Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command);
 		Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command);
 		Task<UnarchiveCompanyResponse> UnarchiveCompany(UnarchiveCompanyCommand command);
