@@ -688,6 +688,7 @@ namespace Pliance.SDK.Contract
 		LimitedPartnerOwner = 23,
 		Director = 24,
 		Founder = 25,
+		Unknown = 26,
 	}
 
 	public class Sni 
