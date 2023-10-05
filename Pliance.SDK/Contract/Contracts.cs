@@ -249,6 +249,13 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
+	public enum EntityType
+	{
+		Unspecified = 0,
+		Person = 1,
+		Company = 2,
+	}
+
 	public enum Fuzziness
 	{
 		Metaphone = 0,
@@ -316,6 +323,7 @@ namespace Pliance.SDK.Contract
 	public class LinkModel 
 	{
 		public Birthdate BirthDate { get; set; }
+		public EntityType EntityType { get; set; }
 		public string FirstName { get; set; }
 		public Gender Gender { get; set; }
 		public string Id { get; set; }
@@ -875,6 +883,7 @@ namespace Pliance.SDK.Contract
 	public class WebhookDeliveryFailure 
 	{
 		public string Id { get; set; }
+		public bool OnCreated { get; set; }
 		public string Reason { get; set; }
 		public string ReferenceId { get; set; }
 		public DateTime Timestamp { get; set; }
