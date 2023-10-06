@@ -36,6 +36,35 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
+	public class BatchPerson 
+	{
+		public List<Address> Addresses { get; set; }
+		public Birthdate Birthdate { get; set; }
+		public string FirstName { get; set; }
+		public string Gender { get; set; }
+		public PersonIdentity Identity { get; set; }
+		public string LastName { get; set; }
+		public string PersonReferenceId { get; set; }
+	}
+
+	public class BatchPersonStatus 
+	{
+		public string Message { get; set; }
+		public string PersonReferenceId { get; set; }
+		public ResponseStatus Status { get; set; }
+	}
+
+	public class BatchRegisterPersonCommand 
+	{
+		public RegisterPersonOptions Options { get; set; }
+		public List<BatchPerson> Persons { get; set; }
+	}
+
+	public class BatchRegisterPersonResponse : Response 
+	{
+		public List<BatchPersonStatus> PersonStatuses { get; set; }
+	}
+
 	public class Birthdate 
 	{
 		public int? Day { get; set; }
@@ -249,6 +278,13 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
+	public enum EntityType
+	{
+		Unspecified = 0,
+		Person = 1,
+		Company = 2,
+	}
+
 	public enum Fuzziness
 	{
 		Metaphone = 0,
@@ -316,6 +352,7 @@ namespace Pliance.SDK.Contract
 	public class LinkModel 
 	{
 		public Birthdate BirthDate { get; set; }
+		public EntityType EntityType { get; set; }
 		public string FirstName { get; set; }
 		public Gender Gender { get; set; }
 		public string Id { get; set; }
@@ -688,6 +725,7 @@ namespace Pliance.SDK.Contract
 		LimitedPartnerOwner = 23,
 		Director = 24,
 		Founder = 25,
+		Unknown = 26,
 	}
 
 	public class Sni 
@@ -871,9 +909,19 @@ namespace Pliance.SDK.Contract
 		public DateTime? UpdatedAt { get; set; }
 	}
 
+	public class WebhookDeleteCommand 
+	{
+		public string Id { get; set; }
+	}
+
+	public class WebhookDeleteResponse : Response 
+	{
+	}
+
 	public class WebhookDeliveryFailure 
 	{
 		public string Id { get; set; }
+		public bool OnCreated { get; set; }
 		public string Reason { get; set; }
 		public string ReferenceId { get; set; }
 		public DateTime Timestamp { get; set; }

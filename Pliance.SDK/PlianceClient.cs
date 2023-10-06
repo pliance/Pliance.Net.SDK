@@ -55,6 +55,16 @@ namespace Pliance.SDK
 			return await ExecutePost<ArchivePersonResponse>("api/PersonCommand/Archive", command);
 		}
 
+		public async Task<BatchRegisterPersonResponse> BatchRegisterPerson(BatchRegisterPersonCommand command)
+		{
+			if (command is null)
+			{
+				throw new ArgumentNullException(nameof(command));
+			}
+
+			return await ExecutePut<BatchRegisterPersonResponse>("api/PersonCommand/Batch", command);
+		}
+
 		public async Task<ClassifyCompanyHitResponse> ClassifyCompanyHit(ClassifyCompanyHitCommand command)
 		{
 			if (command is null)
@@ -133,6 +143,16 @@ namespace Pliance.SDK
 			}
 
 			return await ExecuteDelete<DeletePersonResponse>("api/PersonCommand" + command.UrlEncoded());
+		}
+
+		public async Task<WebhookDeleteResponse> DeleteWebhookDeliveryFailure(WebhookDeleteCommand command)
+		{
+			if (command is null)
+			{
+				throw new ArgumentNullException(nameof(command));
+			}
+
+			return await ExecuteDelete<WebhookDeleteResponse>("api/WebhookCommand" + command.UrlEncoded());
 		}
 
 		public async Task<CompanyReportQueryResult> GetCompanyReport(CompanyReportQuery request)
@@ -325,14 +345,14 @@ namespace Pliance.SDK
 			return await ExecuteGet<ViewCompanyQueryResult>("api/CompanyQuery" + request.UrlEncoded());
 		}
 
-		public async Task<ViewCompanyV2Response> ViewCompanyV2(ViewCompanyQuery request)
+		public async Task<ViewCompanyV2Response> ViewCompanyV2(ViewCompanyQuery query)
 		{
-			if (request is null)
+			if (query is null)
 			{
-				throw new ArgumentNullException(nameof(request));
+				throw new ArgumentNullException(nameof(query));
 			}
 
-			return await ExecuteGet<ViewCompanyV2Response>("api/CompanyV2Query" + request.UrlEncoded());
+			return await ExecuteGet<ViewCompanyV2Response>("api/CompanyV2Query" + query.UrlEncoded());
 		}
 
 		public async Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery request)
