@@ -28,7 +28,7 @@ namespace Pliance.SDK
 		Task<DeleteCompanyResponse> DeleteCompanyV2(DeleteCompanyCommand command);
 		Task<ClassifyCompanyResponse> ClassifyCompanyV2Match(ClassifyCompanyCommand command);
 		Task<ClassifyCompanyLinkResponse> ClassifyCompanyV2Link(ClassifyCompanyLinkCommand command);
-		Task<ViewCompanyV2Response> ViewCompanyV2(ViewCompanyQuery request);
+		Task<ViewCompanyV2Response> ViewCompanyV2(ViewCompanyQuery query);
 		Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command);
 		Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command);
 		Task<UnarchiveCompanyResponse> UnarchiveCompany(UnarchiveCompanyCommand command);
@@ -39,7 +39,9 @@ namespace Pliance.SDK
 		Task<UnarchivePersonResponse> UnarchivePerson(UnarchivePersonCommand command);
 		Task<DeletePersonResponse> DeletePerson(DeletePersonCommand command);
 		Task<ClassifyPersonHitResponse> ClassifyPersonHit(ClassifyPersonHitCommand command);
+		Task<BatchRegisterPersonResponse> BatchRegisterPerson(BatchRegisterPersonCommand command);
 		Task<WebhookUpdateResponse> SaveWebhook(WebhookUpdateCommand command);
+		Task<WebhookDeleteResponse> DeleteWebhookDeliveryFailure(WebhookDeleteCommand command);
         // @inject: !interface
         IPlianceClient WithRequestId(string requestId);
     }

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace Pliance.SDK.Contract
 {
-    // @inject: contracts	public enum ActivityType
+    // @inject: contracts
+	public enum ActivityType
 	{
 		Matched = 0,
 	}
@@ -34,6 +35,35 @@ namespace Pliance.SDK.Contract
 
 	public class ArchivePersonResponse : Response 
 	{
+	}
+
+	public class BatchPerson 
+	{
+		public List<Address> Addresses { get; set; }
+		public Birthdate Birthdate { get; set; }
+		public string FirstName { get; set; }
+		public string Gender { get; set; }
+		public PersonIdentity Identity { get; set; }
+		public string LastName { get; set; }
+		public string PersonReferenceId { get; set; }
+	}
+
+	public class BatchPersonStatus 
+	{
+		public string Message { get; set; }
+		public string PersonReferenceId { get; set; }
+		public ResponseStatus Status { get; set; }
+	}
+
+	public class BatchRegisterPersonCommand 
+	{
+		public RegisterPersonOptions Options { get; set; }
+		public List<BatchPerson> Persons { get; set; }
+	}
+
+	public class BatchRegisterPersonResponse : Response 
+	{
+		public List<BatchPersonStatus> PersonStatuses { get; set; }
 	}
 
 	public class Birthdate 
@@ -878,6 +908,15 @@ namespace Pliance.SDK.Contract
 		public string Filename { get; set; }
 		public string Source { get; set; }
 		public DateTime? UpdatedAt { get; set; }
+	}
+
+	public class WebhookDeleteCommand 
+	{
+		public string Id { get; set; }
+	}
+
+	public class WebhookDeleteResponse : Response 
+	{
 	}
 
 	public class WebhookDeliveryFailure 
