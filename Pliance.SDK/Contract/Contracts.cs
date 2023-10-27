@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace Pliance.SDK.Contract
 {
-    // @inject: contracts
-	public enum ActivityType
+    // @inject: contracts	public enum ActivityType
 	{
 		Matched = 0,
 	}
@@ -231,6 +230,20 @@ namespace Pliance.SDK.Contract
 	public class CompanyReportQueryResultData 
 	{
 		public List<CompanyReportPost> Result { get; set; }
+	}
+
+	public class CompanySearchData 
+	{
+		public List<CompanySearchItem> Companies { get; set; }
+	}
+
+	public class CompanySearchItem 
+	{
+		public string Address { get; set; }
+		public string City { get; set; }
+		public string CompanyIdentifier { get; set; }
+		public string Name { get; set; }
+		public string Zipcode { get; set; }
 	}
 
 	public class CompanySearchQuery 
@@ -727,6 +740,15 @@ namespace Pliance.SDK.Contract
 		Director = 24,
 		Founder = 25,
 		Unknown = 26,
+	}
+
+	public class SearchCompanyQuery 
+	{
+		public string Query { get; set; }
+	}
+
+	public class SearchCompanyV2Response : ResponseGeneric<CompanySearchData> 
+	{
 	}
 
 	public class Sni 
