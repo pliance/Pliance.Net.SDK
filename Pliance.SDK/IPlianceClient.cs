@@ -19,6 +19,8 @@ namespace Pliance.SDK
 		Task<WatchlistQueryResult> WatchlistPerson(WatchlistQuery request);
 		Task<WatchlistQueryResultV2> WatchlistPersonV2(WatchlistQueryV2 request);
 		Task<WatchlistCompanyQueryResult> WatchlistCompany(WatchlistCompanyQuery request);
+		Task<WatchlistCompanyQueryResult> WatchlistCompanyV2(WatchlistCompanyV2Query request);
+		Task<WatchlistQueryResultV2> WatchlistCompanyV2Link(WatchlistCompanyV2LinkQuery request);
 		Task<WebhookQueryResult> GetWebhook(WebhookQuery request);
 		Task<WebhookPokeQueryResult> Poke(WebhookPokeQuery query);
 		Task<WebhookDeliveryFailuresQueryResult> ListWebhookDeliveryFailures(WebhookDeliveryFailuresQuery query);
@@ -28,8 +30,8 @@ namespace Pliance.SDK
 		Task<DeleteCompanyResponse> DeleteCompanyV2(DeleteCompanyCommand command);
 		Task<ClassifyCompanyResponse> ClassifyCompanyV2Match(ClassifyCompanyCommand command);
 		Task<ClassifyCompanyLinkResponse> ClassifyCompanyV2Link(ClassifyCompanyLinkCommand command);
-		Task<ViewCompanyV2Response> ViewCompanyV2(ViewCompanyQuery request);
 		Task<SearchCompanyV2Response> SearchCompany(SearchCompanyQuery request);
+		Task<ViewCompanyV2Response> ViewCompanyV2(ViewCompanyQuery query);
 		Task<RegisterCompanyResponse> RegisterCompany(RegisterCompanyCommand command);
 		Task<ArchiveCompanyResponse> ArchiveCompany(ArchiveCompanyCommand command);
 		Task<UnarchiveCompanyResponse> UnarchiveCompany(UnarchiveCompanyCommand command);

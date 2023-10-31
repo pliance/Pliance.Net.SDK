@@ -355,14 +355,14 @@ namespace Pliance.SDK
 			return await ExecuteGet<ViewCompanyQueryResult>("api/CompanyQuery" + request.UrlEncoded());
 		}
 
-		public async Task<ViewCompanyV2Response> ViewCompanyV2(ViewCompanyQuery request)
+		public async Task<ViewCompanyV2Response> ViewCompanyV2(ViewCompanyQuery query)
 		{
-			if (request is null)
+			if (query is null)
 			{
-				throw new ArgumentNullException(nameof(request));
+				throw new ArgumentNullException(nameof(query));
 			}
 
-			return await ExecuteGet<ViewCompanyV2Response>("api/CompanyV2Query" + request.UrlEncoded());
+			return await ExecuteGet<ViewCompanyV2Response>("api/CompanyV2Query" + query.UrlEncoded());
 		}
 
 		public async Task<ViewPersonQueryResult> ViewPerson(ViewPersonQuery request)
@@ -383,6 +383,26 @@ namespace Pliance.SDK
 			}
 
 			return await ExecuteGet<WatchlistCompanyQueryResult>("api/WatchlistQuery/Company" + request.UrlEncoded());
+		}
+
+		public async Task<WatchlistCompanyQueryResult> WatchlistCompanyV2(WatchlistCompanyV2Query request)
+		{
+			if (request is null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
+			return await ExecuteGet<WatchlistCompanyQueryResult>("api/WatchlistQuery/CompanyV2" + request.UrlEncoded());
+		}
+
+		public async Task<WatchlistQueryResultV2> WatchlistCompanyV2Link(WatchlistCompanyV2LinkQuery request)
+		{
+			if (request is null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
+			return await ExecuteGet<WatchlistQueryResultV2>("api/WatchlistQuery/CompanyV2Link" + request.UrlEncoded());
 		}
 
 		public async Task<WatchlistQueryResult> WatchlistPerson(WatchlistQuery request)

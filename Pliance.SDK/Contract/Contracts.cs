@@ -904,6 +904,19 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
+	public class WatchlistCompanyV2LinkQuery 
+	{
+		public string CompanyReferenceId { get; set; }
+		public string LinkId { get; set; }
+		public string MatchId { get; set; }
+	}
+
+	public class WatchlistCompanyV2Query 
+	{
+		public string CompanyReferenceId { get; set; }
+		public string MatchId { get; set; }
+	}
+
 	public class WatchlistQuery 
 	{
 		public string FirstName { get; set; }
