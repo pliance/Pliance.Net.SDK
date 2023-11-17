@@ -414,6 +414,11 @@ namespace Pliance.SDK.Contract
 	{
 	}
 
+	public class ListCompanyV2Query 
+	{
+		public Page Page { get; set; }
+	}
+
 	public class ListCompanyViewModel 
 	{
 		public bool Active { get; set; }

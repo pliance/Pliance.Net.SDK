@@ -205,6 +205,16 @@ namespace Pliance.SDK
 			return await ExecuteGet<ListCompanyQueryResult>("api/CompanyQuery/List" + request.UrlEncoded());
 		}
 
+		public async Task<ListCompanyQueryResult> ListCompaniesV2(ListCompanyV2Query query)
+		{
+			if (query is null)
+			{
+				throw new ArgumentNullException(nameof(query));
+			}
+
+			return await ExecuteGet<ListCompanyQueryResult>("api/CompanyV2Query/List" + query.UrlEncoded());
+		}
+
 		public async Task<ListPersonQueryResult> ListPersons(ListPersonQuery request)
 		{
 			if (request is null)
