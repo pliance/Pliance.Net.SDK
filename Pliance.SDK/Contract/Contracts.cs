@@ -355,6 +355,7 @@ namespace Pliance.SDK.Contract
 		public EntityType EntityType { get; set; }
 		public string FirstName { get; set; }
 		public Gender Gender { get; set; }
+		public bool HighRiskCountry { get; set; }
 		public string Id { get; set; }
 		public string LastName { get; set; }
 		public List<LinkDescriptionModel> LinkDescriptions { get; set; }
@@ -489,6 +490,7 @@ namespace Pliance.SDK.Contract
 	public class ListRelationViewModel 
 	{
 		public string FirstName { get; set; }
+		public bool IsActive { get; set; }
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
@@ -788,6 +790,7 @@ namespace Pliance.SDK.Contract
 		public bool Archived { get; set; }
 		public Birthdate Birth { get; set; }
 		public string Birthdate { get; set; }
+		public List<string> CheckedWatchLists { get; set; }
 		public string FirstName { get; set; }
 		public Gender Gender { get; set; }
 		public bool HighRiskCountry { get; set; }
@@ -815,6 +818,7 @@ namespace Pliance.SDK.Contract
 	{
 		public bool Archived { get; set; }
 		public List<ViewCompanyPersonResponse> Beneficiaries { get; set; }
+		public List<string> CheckedWatchLists { get; set; }
 		public string CompanyReferenceId { get; set; }
 		public bool HighRiskCountry { get; set; }
 		public List<List<CompanyHit>> Hits { get; set; }
@@ -833,6 +837,7 @@ namespace Pliance.SDK.Contract
 	{
 		public string Address { get; set; }
 		public bool Archived { get; set; }
+		public List<string> CheckedWatchLists { get; set; }
 		public string City { get; set; }
 		public string CompanyReferenceId { get; set; }
 		public string Description { get; set; }
@@ -865,6 +870,7 @@ namespace Pliance.SDK.Contract
 		public bool Archived { get; set; }
 		public Birthdate Birth { get; set; }
 		public string Birthdate { get; set; }
+		public List<string> CheckedWatchLists { get; set; }
 		public string FirstName { get; set; }
 		public Gender Gender { get; set; }
 		public bool HighRiskCountry { get; set; }
@@ -941,7 +947,9 @@ namespace Pliance.SDK.Contract
 
 	public class WebhookDeliveryFailure 
 	{
+		public object Body { get; set; }
 		public string Id { get; set; }
+		public object Metadata { get; set; }
 		public bool OnCreated { get; set; }
 		public string Reason { get; set; }
 		public string ReferenceId { get; set; }
@@ -951,6 +959,7 @@ namespace Pliance.SDK.Contract
 
 	public class WebhookDeliveryFailuresQuery 
 	{
+		public Page Page { get; set; }
 	}
 
 	public class WebhookDeliveryFailuresQueryResult : ResponseGeneric<WebhookDeliveryFailuresQueryResultData> 
