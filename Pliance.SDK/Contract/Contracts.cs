@@ -995,13 +995,14 @@ namespace Pliance.SDK.Contract
 		CompanyLinkAdded = 7,
 		CompanyLinkRemoved = 8,
 		CompanyLinkUpdated = 9,
-		CompanyLinkScreeningMatched = 10,
-		CompanyLinkScreeningMatchRemoved = 11,
-		CompanyLinkScreeningMatchedNameChanged = 12,
-		CompanyScreeningMatched = 13,
-		CompanyScreeningMatchRemoved = 14,
-		CompanyAddressChanged = 15,
-		CompanySniClassificationChanged = 16,
+		CompanyLinkDescriptionUpdated = 10,
+		CompanyLinkScreeningMatched = 11,
+		CompanyLinkScreeningMatchRemoved = 12,
+		CompanyLinkScreeningMatchedNameChanged = 13,
+		CompanyScreeningMatched = 14,
+		CompanyScreeningMatchRemoved = 15,
+		CompanyAddressChanged = 16,
+		CompanySniClassificationChanged = 17,
 	}
 
 	public class WebhookQuery 
