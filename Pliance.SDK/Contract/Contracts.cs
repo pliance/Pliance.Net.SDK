@@ -1003,9 +1003,12 @@ namespace Pliance.SDK.Contract
 		CompanyScreeningMatchRemoved = 15,
 		CompanyAddressChanged = 16,
 		CompanySniClassificationChanged = 17,
-		PersonScreeningMatchesUpdated = 18,
-		CompanyScreeningMatchesUpdated = 19,
-		CompanyLinkScreeningMatchesUpdated = 20,
+		CompanyScreeningMatchesAdded = 18,
+		CompanyScreeningMatchesRemoved = 19,
+		CompanyLinkScreeningMatchesAdded = 20,
+		CompanyLinkScreeningMatchesRemoved = 21,
+		PersonScreeningMatchesAdded = 22,
+		PersonScreeningMatchesRemoved = 23,
 	}
 
 	public class WebhookQuery 
