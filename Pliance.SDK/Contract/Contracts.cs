@@ -188,7 +188,7 @@ namespace Pliance.SDK.Contract
 		public List<TextMatch> MatchedName { get; set; }
 		public string MatchId { get; set; }
 		public string Name { get; set; }
-		public Decimal Score { get; set; }
+		public float Score { get; set; }
 	}
 
 	public class CompanyIdentity 
@@ -545,7 +545,7 @@ namespace Pliance.SDK.Contract
 		public List<TextMatch> MatchedLastName { get; set; }
 		public string MatchId { get; set; }
 		public string ReferenceId { get; set; }
-		public Decimal Score { get; set; }
+		public float Score { get; set; }
 	}
 
 	public class PersonFilter 
