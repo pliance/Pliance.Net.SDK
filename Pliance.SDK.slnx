@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Pliance.SDK.Tests/Pliance.SDK.Tests.csproj" />
+  <Project Path="Pliance.SDK/Pliance.SDK.csproj" />
+</Solution>
