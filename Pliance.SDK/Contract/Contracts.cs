@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace Pliance.SDK.Contract
 {
-    // @inject: contracts	public enum ActivityType
+    // @inject: contracts
+	public enum ActivityType
 	{
 		Matched = 0,
 	}
@@ -1009,6 +1010,8 @@ namespace Pliance.SDK.Contract
 		CompanyLinkScreeningMatchesRemoved = 21,
 		PersonScreeningMatchesAdded = 22,
 		PersonScreeningMatchesRemoved = 23,
+		CompanyEmployeesChanged = 24,
+		CompanyOperationalStatusChanged = 25,
 	}
 
 	public class WebhookQuery 
