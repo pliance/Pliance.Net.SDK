@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace Pliance.SDK.Contract
 {
-    // @inject: contracts	public enum ActivityType
+    // @inject: contracts
+	public enum ActivityType
 	{
 		Matched = 0,
 	}
@@ -184,6 +185,7 @@ namespace Pliance.SDK.Contract
 	{
 		public string AliasId { get; set; }
 		public ClassificationType Classification { get; set; }
+		public bool IsAdverseMedia { get; set; }
 		public bool IsSanction { get; set; }
 		public List<TextMatch> MatchedName { get; set; }
 		public string MatchId { get; set; }
@@ -423,7 +425,9 @@ namespace Pliance.SDK.Contract
 	public class ListCompanyViewModel 
 	{
 		public bool Active { get; set; }
+		public List<AdverseMediaViewModel> AdverseMedia { get; set; }
 		public List<ListAddress> Addresses { get; set; }
+		public bool IsAdverseMedia { get; set; }
 		public bool IsSanction { get; set; }
 		public bool IsSie { get; set; }
 		public string ListId { get; set; }
@@ -465,6 +469,7 @@ namespace Pliance.SDK.Contract
 	public class ListPersonViewModel 
 	{
 		public bool Active { get; set; }
+		public List<AdverseMediaViewModel> AdverseMedia { get; set; }
 		public List<ListAddress> Addresses { get; set; }
 		public List<ListBirthdate> Birthdates { get; set; }
 		public List<string> Countries { get; set; }
@@ -474,6 +479,7 @@ namespace Pliance.SDK.Contract
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
+		public bool IsAdverseMedia { get; set; }
 		public bool IsSip { get; set; }
 		public string ListId { get; set; }
 		public List<string> Lists { get; set; }
@@ -536,6 +542,7 @@ namespace Pliance.SDK.Contract
 		public string AliasId { get; set; }
 		public ClassificationType Classification { get; set; }
 		public string FirstName { get; set; }
+		public bool IsAdverseMedia { get; set; }
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
@@ -647,6 +654,7 @@ namespace Pliance.SDK.Contract
 	public class RegisterCompanyOptions 
 	{
 		public Fuzziness Fuzziness { get; set; }
+		public bool IncludeAdverseMedia { get; set; }
 		public bool OmitUltimateBenefitOwner { get; set; }
 		public Order Order { get; set; }
 		public bool ValidateCompany { get; set; }
@@ -683,6 +691,7 @@ namespace Pliance.SDK.Contract
 	public class RegisterPersonOptions 
 	{
 		public Fuzziness Fuzziness { get; set; }
+		public bool IncludeAdverseMedia { get; set; }
 		public Order Order { get; set; }
 		public List<string> PepCountries { get; set; }
 	}
@@ -823,6 +832,7 @@ namespace Pliance.SDK.Contract
 		public bool HighRiskCountry { get; set; }
 		public List<List<CompanyHit>> Hits { get; set; }
 		public CompanyIdentity Identity { get; set; }
+		public bool IsAdverseMedia { get; set; }
 		public bool IsSanction { get; set; }
 		public bool IsSie { get; set; }
 		public LastChanged LastChanged { get; set; }
@@ -876,6 +886,7 @@ namespace Pliance.SDK.Contract
 		public bool HighRiskCountry { get; set; }
 		public List<List<PersonDetailsHitModel>> Hits { get; set; }
 		public PersonIdentity Identity { get; set; }
+		public bool IsAdverseMedia { get; set; }
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
@@ -905,6 +916,7 @@ namespace Pliance.SDK.Contract
 	public class WatchlistCompanyV2Query 
 	{
 		public string CompanyReferenceId { get; set; }
+		public bool IncludeAdverseMedia { get; set; }
 		public string MatchId { get; set; }
 	}
 
@@ -925,8 +937,39 @@ namespace Pliance.SDK.Contract
 
 	public class WatchlistQueryV2 
 	{
+		public bool IncludeAdverseMedia { get; set; }
 		public string MatchId { get; set; }
 		public string PersonReferenceId { get; set; }
+	}
+
+	public class AdverseMediaArticle
+	{
+		public List<string> AdverseKeywords { get; set; }
+		public string ArticleUrl { get; set; }
+		public string Heading { get; set; }
+		public string Sentiment { get; set; }
+		public string Summary { get; set; }
+	}
+
+	public class AdverseMediaMatchInfo
+	{
+		public string MatchStatus { get; set; }
+		public List<AmlWatcherMatchedName> MatchedNames { get; set; }
+	}
+
+	public class AdverseMediaViewModel
+	{
+		public List<AdverseMediaArticle> Articles { get; set; }
+		public string Birthdate { get; set; }
+		public AdverseMediaMatchInfo MatchInfo { get; set; }
+		public string Name { get; set; }
+	}
+
+	public class AmlWatcherMatchedName
+	{
+		public string MatchedName { get; set; }
+		public string RecordId { get; set; }
+		public string Score { get; set; }
 	}
 
 	public class WatchlistSource 
