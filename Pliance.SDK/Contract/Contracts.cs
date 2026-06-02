@@ -954,7 +954,7 @@ namespace Pliance.SDK.Contract
 	public class AdverseMediaMatchInfo
 	{
 		public string MatchStatus { get; set; }
-		public List<AmlWatcherMatchedName> MatchedNames { get; set; }
+		public List<AdverseMediaMatchedName> MatchedNames { get; set; }
 	}
 
 	public class AdverseMediaViewModel
@@ -965,7 +965,7 @@ namespace Pliance.SDK.Contract
 		public string Name { get; set; }
 	}
 
-	public class AmlWatcherMatchedName
+	public class AdverseMediaMatchedName
 	{
 		public string MatchedName { get; set; }
 		public string RecordId { get; set; }
