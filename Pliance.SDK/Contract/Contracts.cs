@@ -924,6 +924,7 @@ namespace Pliance.SDK.Contract
 	{
 		public string FirstName { get; set; }
 		public string Id { get; set; }
+		public bool IncludeAdverseMedia { get; set; }
 		public string LastName { get; set; }
 	}
 
