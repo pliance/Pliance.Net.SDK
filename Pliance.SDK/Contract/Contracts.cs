@@ -970,7 +970,7 @@ namespace Pliance.SDK.Contract
 	{
 		public string MatchedName { get; set; }
 		public string RecordId { get; set; }
-		public string Score { get; set; }
+		public float Score { get; set; }
 	}
 
 	public class WatchlistSource 
