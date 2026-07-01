@@ -916,7 +916,6 @@ namespace Pliance.SDK.Contract
 	public class WatchlistCompanyV2Query 
 	{
 		public string CompanyReferenceId { get; set; }
-		public bool IncludeAdverseMedia { get; set; }
 		public string MatchId { get; set; }
 	}
 
@@ -924,7 +923,6 @@ namespace Pliance.SDK.Contract
 	{
 		public string FirstName { get; set; }
 		public string Id { get; set; }
-		public bool IncludeAdverseMedia { get; set; }
 		public string LastName { get; set; }
 	}
 
@@ -938,7 +936,6 @@ namespace Pliance.SDK.Contract
 
 	public class WatchlistQueryV2 
 	{
-		public bool IncludeAdverseMedia { get; set; }
 		public string MatchId { get; set; }
 		public string PersonReferenceId { get; set; }
 	}
