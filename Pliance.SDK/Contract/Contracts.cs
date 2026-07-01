@@ -18,6 +18,36 @@ namespace Pliance.SDK.Contract
 		public string StreetNo { get; set; }
 	}
 
+	public class AdverseMediaArticle 
+	{
+		public List<string> AdverseKeywords { get; set; }
+		public string ArticleUrl { get; set; }
+		public string Heading { get; set; }
+		public string Sentiment { get; set; }
+		public string Summary { get; set; }
+	}
+
+	public class AdverseMediaMatchedName 
+	{
+		public string MatchedName { get; set; }
+		public string RecordId { get; set; }
+		public float Score { get; set; }
+	}
+
+	public class AdverseMediaMatchInfo 
+	{
+		public List<AdverseMediaMatchedName> MatchedNames { get; set; }
+		public string MatchStatus { get; set; }
+	}
+
+	public class AdverseMediaViewModel 
+	{
+		public List<AdverseMediaArticle> Articles { get; set; }
+		public string Birthdate { get; set; }
+		public AdverseMediaMatchInfo MatchInfo { get; set; }
+		public string Name { get; set; }
+	}
+
 	public class ArchiveCompanyCommand 
 	{
 		public string CompanyReferenceId { get; set; }
@@ -184,6 +214,7 @@ namespace Pliance.SDK.Contract
 	{
 		public string AliasId { get; set; }
 		public ClassificationType Classification { get; set; }
+		public bool IsAdverseMedia { get; set; }
 		public bool IsSanction { get; set; }
 		public List<TextMatch> MatchedName { get; set; }
 		public string MatchId { get; set; }
@@ -346,6 +377,7 @@ namespace Pliance.SDK.Contract
 	public class LinkDescriptionModel 
 	{
 		public List<Role> Roles { get; set; }
+		public Stake Stake { get; set; }
 		public LinkType Type { get; set; }
 	}
 
@@ -424,6 +456,8 @@ namespace Pliance.SDK.Contract
 	{
 		public bool Active { get; set; }
 		public List<ListAddress> Addresses { get; set; }
+		public List<AdverseMediaViewModel> AdverseMedia { get; set; }
+		public bool IsAdverseMedia { get; set; }
 		public bool IsSanction { get; set; }
 		public bool IsSie { get; set; }
 		public string ListId { get; set; }
@@ -466,11 +500,13 @@ namespace Pliance.SDK.Contract
 	{
 		public bool Active { get; set; }
 		public List<ListAddress> Addresses { get; set; }
+		public List<AdverseMediaViewModel> AdverseMedia { get; set; }
 		public List<ListBirthdate> Birthdates { get; set; }
 		public List<string> Countries { get; set; }
 		public bool Deceased { get; set; }
 		public Gender Gender { get; set; }
 		public List<string> Images { get; set; }
+		public bool IsAdverseMedia { get; set; }
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
@@ -512,6 +548,26 @@ namespace Pliance.SDK.Contract
 		public string ToYear { get; set; }
 	}
 
+	public enum OperationalStatus
+	{
+		Active = 10,
+		InactiveSleeping = 20,
+		Sleeping = 21,
+		UnderLiquidation = 30,
+		Liquidated = 31,
+		UnderBankruptcy = 40,
+		Bankrupt = 41,
+		Dissolved = 50,
+		Merged = 60,
+		Unregistered = 99,
+		Unknown = 70,
+		Dissolving = 100,
+		DissolvingByForce = 101,
+		DissolvedByForce = 102,
+		UnderReconstruction = 103,
+		CompanyDataOutOfDate = 999,
+	}
+
 	public enum Order
 	{
 		Any = 0,
@@ -536,6 +592,7 @@ namespace Pliance.SDK.Contract
 		public string AliasId { get; set; }
 		public ClassificationType Classification { get; set; }
 		public string FirstName { get; set; }
+		public bool IsAdverseMedia { get; set; }
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
@@ -647,6 +704,7 @@ namespace Pliance.SDK.Contract
 	public class RegisterCompanyOptions 
 	{
 		public Fuzziness Fuzziness { get; set; }
+		public bool IncludeAdverseMedia { get; set; }
 		public bool OmitUltimateBenefitOwner { get; set; }
 		public Order Order { get; set; }
 		public bool ValidateCompany { get; set; }
@@ -683,6 +741,7 @@ namespace Pliance.SDK.Contract
 	public class RegisterPersonOptions 
 	{
 		public Fuzziness Fuzziness { get; set; }
+		public bool IncludeAdverseMedia { get; set; }
 		public Order Order { get; set; }
 		public List<string> PepCountries { get; set; }
 	}
@@ -744,6 +803,12 @@ namespace Pliance.SDK.Contract
 		public string ClassificationCode { get; set; }
 	}
 
+	public class Stake 
+	{
+		public Decimal Max { get; set; }
+		public Decimal Min { get; set; }
+	}
+
 	public class TextMatch 
 	{
 		public bool IsMatch { get; set; }
@@ -796,6 +861,7 @@ namespace Pliance.SDK.Contract
 		public bool HighRiskCountry { get; set; }
 		public List<List<PersonDetailsHitModel>> Hits { get; set; }
 		public PersonIdentity Identity { get; set; }
+		public bool IsAdverseMedia { get; set; }
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
@@ -841,15 +907,18 @@ namespace Pliance.SDK.Contract
 		public string City { get; set; }
 		public string CompanyReferenceId { get; set; }
 		public string Description { get; set; }
+		public int Employees { get; set; }
 		public bool HighRiskCountry { get; set; }
 		public List<List<CompanyHit>> Hits { get; set; }
 		public CompanyIdentity Identity { get; set; }
+		public bool IsAdverseMedia { get; set; }
 		public bool IsSanction { get; set; }
 		public bool IsSie { get; set; }
 		public LastChanged LastChanged { get; set; }
 		public LegalFormType? LegalForm { get; set; }
 		public List<LinkModel> Links { get; set; }
 		public string Name { get; set; }
+		public OperationalStatus OperationalStatus { get; set; }
 		public string Signatory { get; set; }
 		public Sni Sni { get; set; }
 		public string Zipcode { get; set; }
@@ -876,6 +945,7 @@ namespace Pliance.SDK.Contract
 		public bool HighRiskCountry { get; set; }
 		public List<List<PersonDetailsHitModel>> Hits { get; set; }
 		public PersonIdentity Identity { get; set; }
+		public bool IsAdverseMedia { get; set; }
 		public bool IsPep { get; set; }
 		public bool IsRca { get; set; }
 		public bool IsSanction { get; set; }
@@ -905,6 +975,7 @@ namespace Pliance.SDK.Contract
 	public class WatchlistCompanyV2Query 
 	{
 		public string CompanyReferenceId { get; set; }
+		public bool IncludeAdverseMedia { get; set; }
 		public string MatchId { get; set; }
 	}
 
@@ -912,6 +983,7 @@ namespace Pliance.SDK.Contract
 	{
 		public string FirstName { get; set; }
 		public string Id { get; set; }
+		public bool IncludeAdverseMedia { get; set; }
 		public string LastName { get; set; }
 	}
 
@@ -925,6 +997,7 @@ namespace Pliance.SDK.Contract
 
 	public class WatchlistQueryV2 
 	{
+		public bool IncludeAdverseMedia { get; set; }
 		public string MatchId { get; set; }
 		public string PersonReferenceId { get; set; }
 	}
@@ -1009,6 +1082,8 @@ namespace Pliance.SDK.Contract
 		CompanyLinkScreeningMatchesRemoved = 21,
 		PersonScreeningMatchesAdded = 22,
 		PersonScreeningMatchesRemoved = 23,
+		CompanyEmployeesChanged = 24,
+		CompanyOperationalStatusChanged = 25,
 	}
 
 	public class WebhookQuery 
